@@ -1,7 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Products} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,7 +12,35 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  const products = await Promise.all([
+    Products.create({
+      name: 'Atlantis',
+      imgUrl:
+        'http://static.callebaut.org/static/vca/images/vincent/projects/160220_hyperions/thumb/hyperions_pl000.jpg',
+      price: 100000,
+      location: 'the ocean',
+      description: 'A ficitonal island mentioned by Plato'
+    }),
+    Products.create({
+      name: 'Spectabilis',
+      imgUrl:
+        'https://www.privateislandsonline.com/uploads/resize/_1747_image_691ba69c7d.jpg-1074-822.jpg',
+      price: 100000,
+      location: 'Bahamas',
+      description: '460 acre island'
+    }),
+    Products.create({
+      name: 'Cave Cay',
+      imgUrl:
+        'https://www.privateislandsonline.com/uploads/resize/_909_image_eae61786dd.jpg-1074-822.jpg',
+      price: 100000,
+      location: 'Bahamas',
+      description: '222 acre island'
+    })
+  ])
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${products.length} users`)
   console.log(`seeded successfully`)
 }
 
