@@ -1,8 +1,9 @@
 import axios from 'axios'
+import getUser from './user'
 
 //Action types
 const GET_CART = 'GET_CART'
-const ADD_TO_CART = 'ADD_TO_CART'
+export const ADD_TO_CART = 'ADD_TO_CART'
 
 //action creators
 
@@ -22,19 +23,19 @@ const initialState = {
 
 //thunk
 
-export const productsThunk = () => async dispatch => {
+export const getCartThunk = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/products')
-    dispatch(getProducts(data))
+    dispatch(getCart(data))
   } catch (error) {
     console.error(error)
   }
 }
 
-export const productThunk = id => async dispatch => {
+export const addToCartThunk = id => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/products/${id}`)
-    dispatch(singleProduct(data))
+    await axios.put(`/api/cart`, {id})
+    dispatch(addToCart(id))
   } catch (error) {
     console.error(error)
   }
@@ -44,10 +45,10 @@ export const productThunk = id => async dispatch => {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_PRODUCTS:
-      return {...state, productList: action.data}
-    case SINGLE_PRODUCT:
-      return {...state, singleProduct: action.product}
+    case GET_CART:
+      return {...state, cart: action.data}
+    case ADD_TO_CART:
+      return {...state, cart: [...state.cart, action.product]}
     default:
       return state
   }

@@ -1,14 +1,15 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
+import {getCartThunk} from '../store/cart'
 
 /**
  * COMPONENT
  */
 class Cart extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.productsThunk()
+    this.props.getCartThunk()
   }
 
   render() {
@@ -21,7 +22,7 @@ class Cart extends React.Component {
     }
     let cartProducts = []
     if (products.length) {
-      cartProducts = cart.map(elem => products[elem])
+      cartProducts = cart.map(elem => products[elem - 1])
     }
 
     return (
@@ -45,12 +46,14 @@ class Cart extends React.Component {
 const mapState = state => {
   return {
     cart: state.user.cart || [],
+    userCart: state.cart,
     products: state.product.productList
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  productsThunk: () => dispatch(productsThunk())
+  productsThunk: () => dispatch(productsThunk()),
+  getCartThunk: () => dispatch(getCartThunk())
 })
 
 export default connect(mapState, mapDispatchToProps)(Cart)
