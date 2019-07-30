@@ -13,7 +13,8 @@ class Cart extends React.Component {
   }
 
   render() {
-    let {cart, products} = this.props
+    let {products} = this.props
+    let cart = this.props.cart
     if (!cart) {
       cart = []
     }
@@ -21,7 +22,7 @@ class Cart extends React.Component {
       products = []
     }
     let cartProducts = []
-    if (products.length) {
+    if (products.length && cart.length) {
       cartProducts = cart.map(elem => products[elem - 1])
     }
 
@@ -31,7 +32,9 @@ class Cart extends React.Component {
           Your Cart:
           {
             <ul>
-              {cartProducts.map(elem => <li key={elem.id}>{elem.name}</li>)}
+              {cartProducts.map((elem, index) => (
+                <li key={index}>{elem.name}</li>
+              ))}
             </ul>
           }
         </h3>
@@ -45,8 +48,7 @@ class Cart extends React.Component {
  */
 const mapState = state => {
   return {
-    cart: state.user.cart || [],
-    userCart: state.cart,
+    cart: state.cart || [],
     products: state.product.productList
   }
 }
