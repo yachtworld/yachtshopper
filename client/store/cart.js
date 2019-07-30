@@ -23,6 +23,9 @@ const initialState = []
 export const getCartThunk = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/cart')
+    if (data.length === 0) {
+      return
+    }
     dispatch(getCart(data))
   } catch (error) {
     console.error(error)

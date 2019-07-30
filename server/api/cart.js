@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
     console.log('user cart', user.cart)
     res.json(user.cart)
   } catch (error) {
-    res.send({cart: []})
+    res.send([])
     next(error)
   }
 })
