@@ -21,6 +21,7 @@ class SingleProduct extends React.Component {
         <p>Price: {singleProduct.price}</p>
         <p>Location: {singleProduct.location}</p>
         <p>Description: {singleProduct.description}</p>
+        <button type="button">Add to cart</button>
       </div>
     )
   }

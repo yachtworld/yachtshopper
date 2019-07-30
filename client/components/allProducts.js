@@ -25,6 +25,7 @@ class AllProducts extends React.Component {
                 <p>Location: {product.location}</p>
                 <p>Description: {product.description}</p>
               </Link>
+              <button type="button">Add to cart</button>
             </div>
           )
         })}
