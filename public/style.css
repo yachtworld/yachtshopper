@@ -2,20 +2,47 @@ body {
   font-family: sans-serif;
 }
 
-a {
-  text-decoration: none;
-}
-
 label {
   display: block;
-}
-
-nav a {
-  display: inline-block;
-  margin: 1em;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+a {
+  color: gray;
+}
+
+.single-product-div {
+  width: 90%;
+}
+
+.single-product-img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.single-product-row {
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.single-product-info {
+  margin-top: 20px;
+}
+
+.border-col {
+  border: 1px solid gray;
+  border-radius: 15px;
+}
+
+.icon {
+  width: 25px;
+}
+
+.login-form {
+  width: 40%;
 }
