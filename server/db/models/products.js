@@ -6,7 +6,7 @@ const Products = db.define('products', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      isEmpty: false
+      notEmpty: true
     }
   },
   imgUrl: {
