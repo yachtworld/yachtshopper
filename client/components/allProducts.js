@@ -7,7 +7,11 @@ class AllProducts extends React.Component {
     this.props.productsThunk()
   }
   render() {
-    const {products} = this.props
+    let {products} = this.props
+    if (!products) {
+      products = []
+    }
+
     return (
       <div>
         {products.map(product => {
@@ -26,7 +30,7 @@ class AllProducts extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  products: state.productList
+  products: state.product.productList
 })
 
 const mapDispatchToProps = dispatch => ({
