@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  productsThunk: () => dispatch(productsThunk)
+  productsThunk: () => dispatch(productsThunk())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllProducts)
