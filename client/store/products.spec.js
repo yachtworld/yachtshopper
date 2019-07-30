@@ -44,7 +44,6 @@ describe('thunk creators', () => {
       mockAxios.onGet(`/api/products/1`).replyOnce(200, fakeProduct)
       await store.dispatch(productThunk(fakeProduct.id))
       const actions = store.getActions()
-      console.log(actions[0])
       expect(actions[0].type).to.be.equal('SINGLE_PRODUCT')
       expect(actions[0].product).to.be.deep.equal(fakeProduct)
     })
