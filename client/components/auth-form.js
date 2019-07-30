@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Button} from 'react-bootstrap'
+import {Button, Form, Col} from 'react-bootstrap'
 
 /**
  * COMPONENT
@@ -11,29 +11,25 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <Button type="submit" variant="success">
-            {displayName}
-          </Button>
-        </div>
+    <Col>
+      <Form onSubmit={handleSubmit} name={name} className="login-form">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control name="email" type="email" placeholder="Enter email" />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+        <br />
+        <Form.Label>Password</Form.Label>
+        <Form.Control name="password" type="password" placeholder="password" />
+        <br />
+        <Button type="submit" variant="success">
+          {displayName}
+        </Button>
         {error && error.response && <div> {error.response.data} </div>}
-      </form>
+      </Form>
+      <br />
       <a href="/auth/google">{displayName} with Google</a>
-    </div>
+    </Col>
   )
 }
 

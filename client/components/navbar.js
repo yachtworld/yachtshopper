@@ -3,30 +3,41 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {Navbar as NavbarReact, Nav} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>Island World</h1>
-    <nav>
+    <NavbarReact bg="light" variant="light">
+      <NavbarReact.Brand>Island World</NavbarReact.Brand>
       {isLoggedIn ? (
-        <div>
+        <React.Fragment>
           {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
+          <LinkContainer to="/home">
+            <Nav.Link>Home</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/#">
+            <Nav.Link onClick={handleClick}>Logout</Nav.Link>
+          </LinkContainer>
+        </React.Fragment>
       ) : (
-        <div>
+        <React.Fragment>
           {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
+          <LinkContainer to="/login">
+            <Nav.Link>Login</Nav.Link>
+          </LinkContainer>
+          <LinkContainer to="/signup">
+            <Nav.Link>Sign Up</Nav.Link>
+          </LinkContainer>
+        </React.Fragment>
       )}
-      <div>
-        <Link to="/cart">Cart</Link>
-      </div>
-    </nav>
+      <LinkContainer to="/products">
+        <Nav.Link>All Products</Nav.Link>
+      </LinkContainer>
+      <LinkContainer to="/cart">
+        <Nav.Link>Cart</Nav.Link>
+      </LinkContainer>
+    </NavbarReact>
     <hr />
   </div>
 )
