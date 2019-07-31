@@ -1,16 +1,25 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
-import {getCartThunk} from '../store/cart'
+import {getCartThunk, deleteItemThunk} from '../store/cart'
 import {Table, Button} from 'react-bootstrap'
 
 /**
  * COMPONENT
  */
 class Cart extends React.Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
   componentDidMount() {
     this.props.productsThunk()
     this.props.getCartThunk()
+  }
+
+  handleClick(event) {
+    console.log(event.target.id)
+    this.props.deleteItemThunk(event.target.id)
   }
 
   render() {
@@ -39,14 +48,33 @@ class Cart extends React.Component {
                     <img src={elem.imgUrl} className="all-products-img" />
                   </td>
                   <td>{elem.name}</td>
-                  <td>{elem.price}</td>
+                  <td>${elem.price}</td>
                   <td>
-                    <Button type="button" id={elem.id} variant="outline-danger">
+                    <Button
+                      type="button"
+                      id={elem.id}
+                      variant="outline-danger"
+                      onClick={this.handleClick}
+                    >
                       Remove from cart
                     </Button>
                   </td>
                 </tr>
               ))}
+              <tr>
+                <td>
+                  <h4>Order Total:</h4>
+                </td>
+                <td />
+                <td>
+                  ${cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)}
+                </td>
+                <td>
+                  <Button type="button" variant="outline-success">
+                    Submit order
+                  </Button>
+                </td>
+              </tr>
             </tbody>
           </Table>
         </h3>
@@ -67,7 +95,8 @@ const mapState = state => {
 
 const mapDispatchToProps = dispatch => ({
   productsThunk: () => dispatch(productsThunk()),
-  getCartThunk: () => dispatch(getCartThunk())
+  getCartThunk: () => dispatch(getCartThunk()),
+  deleteItemThunk: productId => dispatch(deleteItemThunk(productId))
 })
 
 export default connect(mapState, mapDispatchToProps)(Cart)

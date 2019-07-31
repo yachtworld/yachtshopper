@@ -8,11 +8,10 @@ router.get('/', async (req, res, next) => {
     res.json(user.cart)
   } catch (error) {
     res.send([])
-    // next(error)
   }
 })
 
-router.put('/', async (req, res, next) => {
+router.put('/add', async (req, res, next) => {
   try {
     const oldCart = await User.findByPk(req.user.id)
     const newCart = await oldCart.update({
@@ -21,6 +20,20 @@ router.put('/', async (req, res, next) => {
     res.json(newCart)
   } catch (error) {
     res.send({error: 'cart not found'})
-    // next(error)
+  }
+})
+
+router.put('/delete', async (req, res, next) => {
+  try {
+    const oldCart = await User.findByPk(req.user.id)
+    let firstIndex = oldCart.cart.indexOf(parseInt(req.body.id, 10))
+    const newCart = await oldCart.update({
+      cart: oldCart.cart
+        .slice(0, firstIndex)
+        .concat(oldCart.cart.slice(firstIndex + 1))
+    })
+    res.json(newCart.cart)
+  } catch (error) {
+    res.send({error: 'cart not found'})
   }
 })
