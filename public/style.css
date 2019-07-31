@@ -19,6 +19,10 @@ a {
   width: 90%;
 }
 
+.all-product-div {
+  width: 90%;
+}
+
 .single-product-img {
   width: 100%;
   border-radius: 15px;
@@ -28,6 +32,10 @@ a {
   height: 400px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.all-proucts-row {
+  height: 400px;
 }
 
 .single-product-info {
@@ -44,5 +52,13 @@ a {
 }
 
 .login-form {
+  width: 40%;
+}
+
+.all-products-img {
+  width: 50%;
+}
+
+.all-products-img-td {
   width: 40%;
 }

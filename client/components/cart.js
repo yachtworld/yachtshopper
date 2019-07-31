@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
 import {getCartThunk} from '../store/cart'
+import {Table, Button} from 'react-bootstrap'
 
 /**
  * COMPONENT
@@ -13,7 +14,8 @@ class Cart extends React.Component {
   }
 
   render() {
-    let {cart, products} = this.props
+    let {products} = this.props
+    let cart = this.props.cart
     if (!cart) {
       cart = []
     }
@@ -21,7 +23,7 @@ class Cart extends React.Component {
       products = []
     }
     let cartProducts = []
-    if (products.length) {
+    if (products.length && cart.length) {
       cartProducts = cart.map(elem => products[elem - 1])
     }
 
@@ -29,11 +31,24 @@ class Cart extends React.Component {
       <div>
         <h3>
           Your Cart:
-          {
-            <ul>
-              {cartProducts.map(elem => <li key={elem.id}>{elem.name}</li>)}
-            </ul>
-          }
+          <Table className="all-products-div">
+            <tbody>
+              {cartProducts.map((elem, index) => (
+                <tr key={index} className="all-products-row">
+                  <td className="all-products-img-td">
+                    <img src={elem.imgUrl} className="all-products-img" />
+                  </td>
+                  <td>{elem.name}</td>
+                  <td>{elem.price}</td>
+                  <td>
+                    <Button type="button" id={elem.id} variant="outline-danger">
+                      Remove from cart
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         </h3>
       </div>
     )
@@ -45,8 +60,7 @@ class Cart extends React.Component {
  */
 const mapState = state => {
   return {
-    cart: state.user.cart || [],
-    userCart: state.cart,
+    cart: state.cart || [],
     products: state.product.productList
   }
 }

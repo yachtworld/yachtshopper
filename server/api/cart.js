@@ -7,9 +7,11 @@ router.get('/', async (req, res, next) => {
     const user = await User.findByPk(req.user.id)
     res.json(user.cart)
   } catch (error) {
-    next(error)
+    res.send([])
+    // next(error)
   }
 })
+
 router.put('/', async (req, res, next) => {
   try {
     const oldCart = await User.findByPk(req.user.id)
@@ -18,6 +20,7 @@ router.put('/', async (req, res, next) => {
     })
     res.json(newCart)
   } catch (error) {
-    next(error)
+    res.send({error: 'cart not found'})
+    // next(error)
   }
 })

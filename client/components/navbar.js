@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {clearCart} from '../store/cart'
 import {Navbar as NavbarReact, Nav} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 
@@ -55,6 +56,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(clearCart())
     }
   }
 }
