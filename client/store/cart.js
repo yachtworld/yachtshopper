@@ -8,7 +8,7 @@ const DELETE_ITEM = 'DELETE_ITEM'
 
 //action creators
 
-const getCart = data => ({
+export const getCart = data => ({
   type: GET_CART,
   data
 })

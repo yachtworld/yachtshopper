@@ -30,14 +30,13 @@ describe('Cart routes', () => {
       expect(res.body).to.be.deep.equal([])
     })
 
-    // it('PUT /api/cart', async () => {
+    // it('PUT /api/cart/add', async () => {
     //   const res = await request(app)
-    //     .put('/api/cart')
+    //     .put('/api/cart/add')
     //     .send({
     //       cart: ourCart
     //     })
     //     .expect(200)
-
     //   expect(res.body).to.be.an('array')
     //   expect(res.body.cart).to.be.deep.equal([1, 2, 3])
     // })
