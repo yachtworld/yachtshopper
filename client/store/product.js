@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 //Action types
-const GET_PRODUCTS = 'GET_PRODUCTS'
-const SINGLE_PRODUCT = 'SINGLE_PRODUCT'
+export const GET_PRODUCTS = 'GET_PRODUCTS'
+export const SINGLE_PRODUCT = 'SINGLE_PRODUCT'
 
 //action creators
 
