@@ -2,7 +2,7 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
-import {productsThunk, productThunk} from './product'
+import reducer, {productsThunk, productThunk} from './product'
 import {expect} from 'Chai'
 
 const middlewares = [thunkMiddleware]
@@ -50,53 +50,54 @@ describe('thunk creators', () => {
   })
 })
 
-// describe('redux store', () => {
-//   describe('action creators', () => {
-//     const islandList = { id: 1, name: 'Starfleet Academy' };
-//     let mock;
-//     before(() => {
-//       mock = new MockAdapter(axios);
-//     });
-//     afterEach(() => {
-//       mock.reset();
-//     });
-//     after(() => {
-//       mock.restore();
-//     });
-//     describe('`addCampusAction`', () => {
-//       it('creates an ADD_CAMPUS action', () => {
-//         const addCampusAction = addCampus(starfleetCampus);
-//         expect(addCampusAction.type).to.equal(ADD_CAMPUS);
-//         expect(addCampusAction.campus).to.eql(starfleetCampus);
-//       });
-//     });
-//     describe('`postCampus`', () => {
-//       it('returns a thunk to post a new campus to the backend and dispatch an ADD_CAMPUS action', async () => {
-//         mock.onPost('/api/campuses').replyOnce(201, starfleetCampus);
-//         await store.dispatch(postCampus(starfleetCampus));
-//         const actions = store.getActions();
-//         expect(actions[0].type).to.equal('ADD_CAMPUS');
-//         expect(actions[0].campus).to.deep.equal(starfleetCampus);
-//         await Campus.findById(1);
-//       });
-//     });
-//   });
-//   describe('reducer', () => {
-//     it('returns a new state with the newly created campus added to the list of campuses', () => {
-//       const remoteCampus = { id: 1, name: 'Fullstack Remote Campus' };
-//       const starfleetCampus = { id: 2, name: 'Starfleet Academy' };
-//       initialState.campuses = [remoteCampus];
-//       const newState = reducer(initialState, {
-//         type: ADD_CAMPUS,
-//         campus: starfleetCampus,
-//       });
-//       expect(newState.campuses.length).to.equal(2);
-//       expect(
-//         newState.campuses.find(
-//           campus => campus.name === 'Starfleet Academy'
-//         )
-//       ).to.deep.equal(starfleetCampus);
-//       expect(newState.students).to.equal(initialState.students);
-//       expect(newState.selectedCampus).to.equal(initialState.selectedCampus);
-//     });
-//   });
+describe('reducer', () => {
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).deep.equal({
+      productList: [],
+      singleProduct: {}
+    })
+  })
+
+  // it('should handle GET_PRODUCTS', () => {
+  //   const fakeIsland = {name: 'Cool Island'}
+  //   expect(
+  //     reducer([], {
+  //       type: GET_PRODUCTS,
+  //       data: fakeIsland
+  //     })
+  //   ).equal([
+  //     {
+  //       text: 'Run the tests',
+  //       completed: false,
+  //       id: 0
+  //     }
+  //   ])
+
+  //   expect(
+  //     reducer(
+  //       [
+  //         {
+  //           text: 'Use Redux',
+  //           completed: false,
+  //           id: 0
+  //         }
+  //       ],
+  //       {
+  //         type: types.ADD_TODO,
+  //         text: 'Run the tests'
+  //       }
+  //     )
+  //   ).equal([
+  //     {
+  //       text: 'Run the tests',
+  //       completed: false,
+  //       id: 1
+  //     },
+  //     {
+  //       text: 'Use Redux',
+  //       completed: false,
+  //       id: 0
+  //     }
+  //   ])
+  // })
+})
