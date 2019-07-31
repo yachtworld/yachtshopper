@@ -9,6 +9,8 @@ const adapter = new Adapter()
 Enzyme.configure({adapter})
 
 import AllProducts from './allProducts'
+import Cart from './cart'
+import SingleProduct from './SingleProduct'
 
 describe('React', () => {
   describe('<AllProducts /> component', () => {
@@ -23,14 +25,10 @@ describe('React', () => {
       // useful methods for testing it.
       wrapper = shallow(<AllProducts store={store} />)
       renderWrapper = render(<AllProducts store={store} />)
-      console.log(renderWrapper)
+      // console.log(renderWrapper)
       // console.log(wrapper.debug())
       // console.log(wrapper.props().children.props)
     })
-
-    //
-    // has state
-    //
 
     it('expects productsThunk to be a function', () => {
       expect(wrapper.props().children.props.productsThunk).to.be.a('function')
@@ -43,5 +41,51 @@ describe('React', () => {
     it('expect one table to be rendered', () => {
       expect(renderWrapper.find('.all-products-div')._root.length).to.equal(1)
     })
-  }) // end <AdoptionForm /> component
+  }) // end <AllProducts /> component
+
+  describe('<Cart /> component', () => {
+    let wrapper
+    let renderWrapper
+
+    beforeEach('Create component', () => {
+      wrapper = shallow(<Cart store={store} />)
+      renderWrapper = render(<Cart store={store} />)
+      // console.log(renderWrapper)
+      // console.log(wrapper.debug())
+      // console.log(wrapper.props().children.props)
+    })
+
+    it('expects productsThunk to be a function', () => {
+      expect(wrapper.props().children.props.productsThunk).to.be.a('function')
+    })
+
+    it('expects getCartThunk to be a function', () => {
+      expect(wrapper.props().children.props.getCartThunk).to.be.a('function')
+    })
+
+    it('expect one table to be rendered', () => {
+      expect(renderWrapper.find('.all-products-div')._root.length).to.equal(1)
+    })
+  }) // end <Cart /> component
+
+  describe('<SingleProduct /> component', () => {
+    let wrapper
+    let renderWrapper
+
+    beforeEach('Create component', () => {
+      wrapper = shallow(<SingleProduct store={store} />)
+      renderWrapper = render(<SingleProduct store={store} />)
+      // console.log(renderWrapper)
+      // console.log(wrapper.debug())
+      // console.log(wrapper.props().children.props)
+    })
+
+    it('expects productThunk to be a function', () => {
+      expect(wrapper.props().children.props.productThunk).to.be.a('function')
+    })
+
+    it('expect one table to be rendered', () => {
+      expect(renderWrapper.find('.single-product-div')._root.length).to.equal(1)
+    })
+  }) // end <SingleProduct /> component
 }) // end React specs
