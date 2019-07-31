@@ -6,7 +6,7 @@ export const SINGLE_PRODUCT = 'SINGLE_PRODUCT'
 
 //action creators
 
-const getProducts = data => ({
+export const getProducts = data => ({
   type: GET_PRODUCTS,
   data
 })
