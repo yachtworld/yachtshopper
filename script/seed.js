@@ -36,6 +36,24 @@ async function seed() {
       price: 100000,
       location: 'Bahamas',
       description: '222 acre island'
+    }),
+    Products.create({
+      name: 'Jewel Caye',
+      imgUrl:
+        'https://www.privateislandsonline.com/uploads/resize/_1462_5877e73d077f3.jpg-1360-1100.jpg',
+      price: 10000000,
+      location: 'Belize',
+      description:
+        'Lying in the azure waters of Belize’s Cockney Range, only 6.5 miles east of the Sittee River Bar mouth and Hopkins Village, Jewel Caye delivers two acres of tropical seascapes.'
+    }),
+    Products.create({
+      name: 'Taveuni Island Resort',
+      imgUrl:
+        'https://www.privateislandsonline.com/uploads/resize/_2166_58a717b099569.jpg-1074-822.jpg',
+      price: 10000000,
+      location: 'Fiji',
+      description:
+        'A rare opportunity to acquire this renowned and fully established, award winning resort and spa. This premiere freehold island property is a unique offering beyond compare!'
     })
   ])
 
