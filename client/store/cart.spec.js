@@ -1,51 +1,54 @@
-// import axios from 'axios'
-// import MockAdapter from 'axios-mock-adapter'
-// import configureMockStore from 'redux-mock-store'
-// import thunkMiddleware from 'redux-thunk'
-// import {productsThunk, productThunk} from './product'
-// import {expect} from 'Chai'
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
+import configureMockStore from 'redux-mock-store'
+import thunkMiddleware from 'redux-thunk'
+import reducer, {getCartThunk, addToCartThunk} from './cart'
+import {expect} from 'Chai'
 
-// const middlewares = [thunkMiddleware]
-// const mockStore = configureMockStore(middlewares)
+const middlewares = [thunkMiddleware]
+const mockStore = configureMockStore(middlewares)
 
-// describe('thunk creators', () => {
-//   let store
-//   let mockAxios
+describe('thunk creators', () => {
+  let store
+  let mockAxios
 
-//   const initialState = {
-//     products: [],
-//     singleProduct: {}
-//   }
+  const initialState = []
 
-//   beforeEach(() => {
-//     mockAxios = new MockAdapter(axios)
-//     store = mockStore(initialState)
-//   })
+  beforeEach(() => {
+    mockAxios = new MockAdapter(axios)
+    store = mockStore(initialState)
+  })
 
-//   afterEach(() => {
-//     mockAxios.restore()
-//     store.clearActions()
-//   })
+  afterEach(() => {
+    mockAxios.restore()
+    store.clearActions()
+  })
 
-//   describe('products', () => {
-//     it('eventually dispatches the GET PRODUCTS action', async () => {
-//       const fakeProductList = [{name: 'Atlantis'}, {name: 'Cave Cay'}]
-//       mockAxios.onGet('/api/products').replyOnce(200, fakeProductList)
-//       await store.dispatch(productsThunk())
-//       const actions = store.getActions()
-//       expect(actions[0].type).to.be.equal('GET_PRODUCTS')
-//       expect(actions[0].data).to.be.deep.equal(fakeProductList)
-//     })
-//   })
+  describe('get cart', () => {
+    it('eventually dispatches the getCart action', async () => {
+      const fakeCart = [1, 2]
+      mockAxios.onGet('/api/cart').replyOnce(200, fakeCart)
+      await store.dispatch(getCartThunk())
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal('GET_CART')
+      expect(actions[0].data).to.be.deep.equal(fakeCart)
+    })
+  })
 
-//   describe('single product', () => {
-//     it('eventually dispatches the SINGLE PRODUCT action', async () => {
-//       const fakeProduct = {id: 1, name: 'Spectabilis'}
-//       mockAxios.onGet(`/api/products/1`).replyOnce(200, fakeProduct)
-//       await store.dispatch(productThunk(fakeProduct.id))
-//       const actions = store.getActions()
-//       expect(actions[0].type).to.be.equal('SINGLE_PRODUCT')
-//       expect(actions[0].product).to.be.deep.equal(fakeProduct)
-//     })
-//   })
-// })
+  describe('add to cart', () => {
+    it('eventually dispatches the addToCart action', async () => {
+      const fakeCartItem = {id: 5}
+      mockAxios.onPut(`/api/cart`).replyOnce(200, fakeCartItem)
+      await store.dispatch(addToCartThunk(fakeCartItem.id))
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal('ADD_TO_CART')
+      expect(actions[0].product).to.be.deep.equal(5)
+    })
+  })
+})
+
+describe('reducer', () => {
+  it('should return the initial state', () => {
+    expect(reducer(undefined, {})).deep.equal([])
+  })
+})
