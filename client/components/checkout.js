@@ -18,6 +18,8 @@ class Cart extends React.Component {
     this.props.getCartThunk()
   }
 
+  componentWillUnmount() {}
+
   handleClick(event) {
     console.log(event.target.id)
     this.props.deleteItemThunk(event.target.id)
