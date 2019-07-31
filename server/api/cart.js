@@ -5,11 +5,10 @@ module.exports = router
 router.get('/', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id)
-    console.log('user cart', user.cart)
     res.json(user.cart)
   } catch (error) {
     res.send([])
-    next(error)
+    // next(error)
   }
 })
 
@@ -22,6 +21,6 @@ router.put('/', async (req, res, next) => {
     res.json(newCart)
   } catch (error) {
     res.send({error: 'cart not found'})
-    next(error)
+    // next(error)
   }
 })
