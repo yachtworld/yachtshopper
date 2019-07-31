@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
 import {Link} from 'react-router-dom'
 import {addToCartThunk} from '../store/cart'
-import {Row, Col, Button, Table} from 'react-bootstrap'
+import {Button, Table} from 'react-bootstrap'
 
 class AllProducts extends React.Component {
   componentDidMount() {

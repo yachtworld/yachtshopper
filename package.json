@@ -48,6 +48,7 @@
     "express": "^4.16.4",
     "express-session": "^1.15.1",
     "history": "^4.9.0",
+    "jest": "^24.8.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
@@ -64,6 +65,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.3.1",
+    "sinon": "^7.3.2",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
@@ -83,6 +85,7 @@
     "@babel/register": "^7.4.0",
     "axios-mock-adapter": "^1.16.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.5",
     "chai": "^4.2.0",
     "css-loader": "^3.1.0",
