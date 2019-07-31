@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
 import {getCartThunk} from '../store/cart'
+import {Table, Button} from 'react-bootstrap'
 
 /**
  * COMPONENT
@@ -30,13 +31,24 @@ class Cart extends React.Component {
       <div>
         <h3>
           Your Cart:
-          {
-            <ul>
+          <Table className="all-products-div">
+            <tbody>
               {cartProducts.map((elem, index) => (
-                <li key={index}>{elem.name}</li>
+                <tr key={index} className="all-products-row">
+                  <td className="all-products-img-td">
+                    <img src={elem.imgUrl} className="all-products-img" />
+                  </td>
+                  <td>{elem.name}</td>
+                  <td>{elem.price}</td>
+                  <td>
+                    <Button type="button" id={elem.id} variant="outline-danger">
+                      Remove from cart
+                    </Button>
+                  </td>
+                </tr>
               ))}
-            </ul>
-          }
+            </tbody>
+          </Table>
         </h3>
       </div>
     )

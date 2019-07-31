@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
 import {Link} from 'react-router-dom'
 import {addToCartThunk} from '../store/cart'
+import {Row, Col, Button, Table} from 'react-bootstrap'
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -20,24 +21,37 @@ class AllProducts extends React.Component {
     }
 
     return (
-      <div>
-        {products.map(product => {
-          return (
-            <div key={product.id}>
-              <img src={product.imgUrl} />
-              <Link to={`/products/${product.id}`}>
-                <h2>Name: {product.name}</h2>
-                <p>Price: {product.price}</p>
-                <p>Location: {product.location}</p>
-                <p>Description: {product.description}</p>
-              </Link>
-              <button type="button" id={product.id} onClick={this.clickHandler}>
-                Add to cart
-              </button>
-            </div>
-          )
-        })}
-      </div>
+      <Table className="all-products-div">
+        <tbody>
+          {products.map(product => {
+            return (
+              <tr key={product.id} className="all-products-row">
+                <td className="all-products-img-td">
+                  <img src={product.imgUrl} className="all-products-img" />
+                </td>
+
+                <td>
+                  <Link to={`/products/${product.id}`}>{product.name}</Link>
+                </td>
+                <td>
+                  <Link to={`/products/${product.id}`}>${product.price}</Link>
+                </td>
+
+                <td>
+                  <Button
+                    type="button"
+                    id={product.id}
+                    onClick={this.clickHandler}
+                    variant="outline-primary"
+                  >
+                    Add to cart
+                  </Button>
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </Table>
     )
   }
 }
