@@ -1,33 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
-import {getCartThunk, deleteItemThunk} from '../store/cart'
+import {getCartThunk} from '../store/cart'
 import {Table, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import {checkoutThunk} from '../store/checkoutCart'
 
 /**
  * COMPONENT
  */
-class Cart extends React.Component {
-  constructor() {
-    super()
-    this.handleClick = this.handleClick.bind(this)
-  }
+class Checkout extends React.Component {
   componentDidMount() {
     this.props.productsThunk()
     this.props.getCartThunk()
-  }
-
-  componentWillUnmount() {}
-
-  handleClick(event) {
-    console.log(event.target.id)
-    this.props.deleteItemThunk(event.target.id)
+    this.props.checkoutThunk()
   }
 
   render() {
-    let {products} = this.props
-    let cart = this.props.cart
+    let {products, cart, checkout} = this.props
+
     if (!cart) {
       cart = []
     }
@@ -38,6 +29,12 @@ class Cart extends React.Component {
     if (products.length && cart.length) {
       cartProducts = cart.map(elem => products[elem - 1])
     }
+
+    if (!checkout) {
+      checkout = []
+    }
+
+    console.log('CHECKOUT', checkout)
 
     return (
       <div>
@@ -94,17 +91,18 @@ class Cart extends React.Component {
 const mapState = state => {
   return {
     cart: state.cart || [],
-    products: state.product.productList
+    products: state.product.productList,
+    checkout: state.checkoutCart || []
   }
 }
 
 const mapDispatchToProps = dispatch => ({
   productsThunk: () => dispatch(productsThunk()),
   getCartThunk: () => dispatch(getCartThunk()),
-  deleteItemThunk: productId => dispatch(deleteItemThunk(productId))
+  checkoutThunk: () => dispatch(checkoutThunk())
 })
 
-export default connect(mapState, mapDispatchToProps)(Cart)
+export default connect(mapState, mapDispatchToProps)(Checkout)
 
 /**
  * PROP TYPES

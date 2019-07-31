@@ -23,6 +23,19 @@ router.put('/add', async (req, res, next) => {
   }
 })
 
+router.put('/checkout', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.user.id)
+    const checkout = await user.update({
+      cart: [],
+      checkoutCart: req.body.data
+    })
+    res.json(checkout)
+  } catch (error) {
+    res.send({error: 'cart not found'})
+  }
+})
+
 router.put('/delete', async (req, res, next) => {
   try {
     const oldCart = await User.findByPk(req.user.id)

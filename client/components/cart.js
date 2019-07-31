@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
-import {getCartThunk, deleteItemThunk} from '../store/cart'
+import {getCartThunk, deleteItemThunk, clearCart} from '../store/cart'
 import {Table, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 
@@ -19,7 +19,6 @@ class Cart extends React.Component {
   }
 
   handleClick(event) {
-    console.log(event.target.id)
     this.props.deleteItemThunk(event.target.id)
   }
 
@@ -72,7 +71,11 @@ class Cart extends React.Component {
                 </td>
                 <td>
                   <Link to="/checkout">
-                    <Button type="button" variant="outline-success">
+                    <Button
+                      type="button"
+                      variant="outline-success"
+                      onClick={this.props.clearCart}
+                    >
                       Submit order
                     </Button>
                   </Link>
@@ -99,7 +102,8 @@ const mapState = state => {
 const mapDispatchToProps = dispatch => ({
   productsThunk: () => dispatch(productsThunk()),
   getCartThunk: () => dispatch(getCartThunk()),
-  deleteItemThunk: productId => dispatch(deleteItemThunk(productId))
+  deleteItemThunk: productId => dispatch(deleteItemThunk(productId)),
+  clearCart: () => dispatch(clearCart())
 })
 
 export default connect(mapState, mapDispatchToProps)(Cart)
