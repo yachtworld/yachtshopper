@@ -3,6 +3,7 @@ import axios from 'axios'
 //Action types
 const GET_CART = 'GET_CART'
 export const ADD_TO_CART = 'ADD_TO_CART'
+const CLEAR_CART = 'CLEAR_CART'
 
 //action creators
 
@@ -14,6 +15,10 @@ const getCart = data => ({
 const addToCart = product => ({
   type: ADD_TO_CART,
   product
+})
+
+export const clearCart = () => ({
+  type: CLEAR_CART
 })
 
 const initialState = []
@@ -49,6 +54,8 @@ export default function(state = initialState, action) {
       return action.data
     case ADD_TO_CART:
       return state.concat(action.product)
+    case CLEAR_CART:
+      return []
     default:
       return state
   }
