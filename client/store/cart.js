@@ -65,6 +65,18 @@ export const deleteItemThunk = productId => async dispatch => {
   }
 }
 
+// export const clearCartThunk= () => async dispatch => {
+//   try {
+//     const newCart = await axios.post('/api/cart/delete', {id: productId})
+//     if (!newCart.data.error) {
+//       dispatch(getCart(newCart.data))
+//     } else {
+//       dispatch(deleteItem(productId))
+//     }
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
 //reducer
 
 export default function(state = initialState, action) {

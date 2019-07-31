@@ -7,6 +7,7 @@ import {me} from './store'
 import AllProducts from './components/AllProducts'
 
 import Cart from './components/Cart'
+import Checkout from './components/Checkout'
 
 import SingleProduct from './components/SingleProduct'
 
@@ -29,6 +30,7 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route
           path="/products/:id"
           render={routeProps => <SingleProduct {...routeProps} />}
