@@ -4,6 +4,7 @@ import {productsThunk} from '../store/product'
 import {Link} from 'react-router-dom'
 import {addToCartThunk, getCartThunk} from '../store/cart'
 import {Button, Col, Row, Alert} from 'react-bootstrap'
+import Carousel from './carousel'
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -34,6 +35,7 @@ class AllProducts extends React.Component {
 
     return (
       <div>
+        <Carousel id="header-carousel" />
         {chunkedProducts.map(productArr => {
           return (
             <Row className="all-products-div" key={productArr}>
