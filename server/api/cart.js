@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Products} = require('../db/models')
+const {User, Products, Order} = require('../db/models')
 
 module.exports = router
 
@@ -30,7 +30,13 @@ router.put('/checkout', async (req, res, next) => {
     const user = await User.findByPk(req.user.id)
     const order = await user.getProducts()
     user.setProducts([])
-    order.forEach(item => user.addOrder(item))
+    let userOrders = await Order.findAll({where: {userId: req.user.id}})
+    let orderId = Math.max(userOrders.map(product => product.orderId))
+    if (orderId) orderId++
+    else orderId = 1
+    order.forEach(item =>
+      Order.create({userId: user.id, productId: item.id, orderId: orderId})
+    )
     res.json(order.map(product => product.id))
   } catch (error) {
     res.send({error: 'cart not found'})
