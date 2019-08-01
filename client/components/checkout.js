@@ -30,7 +30,7 @@ class Checkout extends React.Component {
     return (
       <div>
         <h3>
-          Success! Your order has been submitted.:
+          Success! Your order has been submitted:
           <Table className="cart-products-div">
             <tbody>
               {cartProducts.map((elem, index) => (

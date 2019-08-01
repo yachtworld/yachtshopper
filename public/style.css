@@ -113,3 +113,8 @@ a {
 .cart-products-img-td {
   width: 30%;
 }
+
+.product-alert {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}

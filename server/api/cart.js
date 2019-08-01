@@ -39,9 +39,14 @@ router.put('/checkout', async (req, res, next) => {
       let orderId = Math.max(userOrders.map(product => product.orderId))
       if (orderId) orderId++
       else orderId = 1
-      order.forEach(item =>
-        Order.create({userId: user.id, productId: item.id, orderId: orderId})
-      )
+      order.forEach(async item => {
+        await Order.create({
+          userId: user.id,
+          productId: item.id,
+          orderId: orderId
+        })
+        await Products.update({sold: true}, {where: {id: item.id}})
+      })
       res.json(order.map(product => product.id))
     }
     res.sendStatus(200)
