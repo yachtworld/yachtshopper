@@ -1,11 +1,13 @@
 const router = require('express').Router()
-const {User} = require('../db/models')
+const {User, Products, Order} = require('../db/models')
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id)
-    res.json(user.cart)
+    const userCart = await user.getProducts()
+    res.json(userCart.map(item => item.id))
   } catch (error) {
     res.send([])
   }
@@ -13,11 +15,11 @@ router.get('/', async (req, res, next) => {
 
 router.put('/add', async (req, res, next) => {
   try {
-    const oldCart = await User.findByPk(req.user.id)
-    const newCart = await oldCart.update({
-      cart: [...oldCart.cart, req.body.id]
-    })
-    res.json(newCart)
+    const user = await User.findByPk(req.user.id)
+    const product = await Products.findByPk(req.body.id)
+    user.addProduct(product)
+    const allProducts = await user.getProducts()
+    res.json(allProducts.map(item => item.id))
   } catch (error) {
     res.send({error: 'cart not found'})
   }
@@ -26,11 +28,16 @@ router.put('/add', async (req, res, next) => {
 router.put('/checkout', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.user.id)
-    const checkout = await user.update({
-      cart: [],
-      checkoutCart: req.body.data
-    })
-    res.json(checkout)
+    const order = await user.getProducts()
+    user.setProducts([])
+    let userOrders = await Order.findAll({where: {userId: req.user.id}})
+    let orderId = Math.max(userOrders.map(product => product.orderId))
+    if (orderId) orderId++
+    else orderId = 1
+    order.forEach(item =>
+      Order.create({userId: user.id, productId: item.id, orderId: orderId})
+    )
+    res.json(order.map(product => product.id))
   } catch (error) {
     res.send({error: 'cart not found'})
   }
@@ -38,14 +45,11 @@ router.put('/checkout', async (req, res, next) => {
 
 router.put('/delete', async (req, res, next) => {
   try {
-    const oldCart = await User.findByPk(req.user.id)
-    let firstIndex = oldCart.cart.indexOf(parseInt(req.body.id, 10))
-    const newCart = await oldCart.update({
-      cart: oldCart.cart
-        .slice(0, firstIndex)
-        .concat(oldCart.cart.slice(firstIndex + 1))
-    })
-    res.json(newCart.cart)
+    const user = await User.findByPk(req.user.id)
+    const product = await Products.findByPk(req.body.id)
+    await user.removeProduct(product)
+    const newCart = await user.getProducts()
+    res.json(newCart.map(item => item.id))
   } catch (error) {
     res.send({error: 'cart not found'})
   }

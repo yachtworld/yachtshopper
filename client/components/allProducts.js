@@ -14,6 +14,7 @@ class AllProducts extends React.Component {
     event.preventDefault()
     this.props.addToCartThunk(event.target.id)
   }
+
   render() {
     let {products} = this.props
     if (!products) {
@@ -21,8 +22,8 @@ class AllProducts extends React.Component {
     }
 
     const chunker = function(arr, chunkSize) {
-      var R = []
-      for (var i = 0; i < arr.length; i += chunkSize)
+      let R = []
+      for (let i = 0; i < arr.length; i += chunkSize)
         R.push(arr.slice(i, i + chunkSize))
       return R
     }

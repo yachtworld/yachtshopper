@@ -12,6 +12,7 @@ class Cart extends React.Component {
   constructor() {
     super()
     this.handleClick = this.handleClick.bind(this)
+    this.handleCheckout = this.handleCheckout.bind(this)
   }
   componentDidMount() {
     this.props.productsThunk()
@@ -20,6 +21,11 @@ class Cart extends React.Component {
 
   handleClick(event) {
     this.props.deleteItemThunk(event.target.id)
+  }
+
+  handleCheckout() {
+    this.props.clearCart()
+    this.props.history.push('/checkout')
   }
 
   render() {
@@ -40,12 +46,12 @@ class Cart extends React.Component {
       <div>
         <h3>
           Your Cart:
-          <Table className="all-products-div">
+          <Table className="cart-products-div">
             <tbody>
               {cartProducts.map((elem, index) => (
-                <tr key={index} className="all-products-row">
-                  <td className="all-products-img-td">
-                    <img src={elem.imgUrl} className="all-products-img" />
+                <tr key={index} className="cart-products-row">
+                  <td className="cart-products-img-td">
+                    <img src={elem.imgUrl} className="cart-products-img" />
                   </td>
                   <td>{elem.name}</td>
                   <td>${elem.price}</td>
@@ -70,15 +76,13 @@ class Cart extends React.Component {
                   ${cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)}
                 </td>
                 <td>
-                  <Link to="/checkout">
-                    <Button
-                      type="button"
-                      variant="outline-success"
-                      onClick={this.props.clearCart}
-                    >
-                      Submit order
-                    </Button>
-                  </Link>
+                  <Button
+                    type="button"
+                    variant="outline-success"
+                    onClick={this.handleCheckout}
+                  >
+                    Submit order
+                  </Button>
                 </td>
               </tr>
             </tbody>
