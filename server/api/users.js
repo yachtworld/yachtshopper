@@ -10,7 +10,11 @@ router.get('/', async (req, res, next) => {
       // send everything to anyone who asks!
       attributes: ['id', 'email']
     })
-    res.json(users)
+    if (req.user.admin === true) {
+      res.json(users)
+    } else {
+      res.send('You are not authorized to view this page.')
+    }
   } catch (err) {
     next(err)
   }
