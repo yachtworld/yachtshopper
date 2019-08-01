@@ -36,9 +36,9 @@ class AllProducts extends React.Component {
     return (
       <div>
         <Carousel id="header-carousel" />
-        {chunkedProducts.map(productArr => {
+        {chunkedProducts.map((productArr, index) => {
           return (
-            <Row className="all-products-div" key={productArr}>
+            <Row className="all-products-div" key={index}>
               {productArr.map(product => {
                 return (
                   <Col key={product.id} className="all-products-row">
