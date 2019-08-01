@@ -14,7 +14,7 @@ class CarouselHeader extends React.Component {
         <Carousel.Item>
           <img
             className="carousel-img"
-            src="https://www.privateislandsonline.com/uploads/resize/_1941_5882c62c7a853.jpg-1360-1100.jpg"
+            src="https://68c8648dbe66747498d1-6027f91c84d2b73bebfc9b6bc4f4a0ac.ssl.cf3.rackcdn.com/5a940837223e9502fcbf2b8e/Cook-Island-banner.jpg"
             alt="First slide"
           />
           <Carousel.Caption>
@@ -27,7 +27,7 @@ class CarouselHeader extends React.Component {
         <Carousel.Item>
           <img
             className="carousel-img"
-            src="https://www.privateislandsonline.com/uploads/resize/_2166_58a717b099569.jpg-1074-822.jpg"
+            src="https://ameliaadventures.com/wp-content/uploads/2017/06/Amelia-Island-Sunset-Cruise-banner-16x9-9554-1.jpg"
             alt="Third slide"
           />
 
@@ -41,7 +41,7 @@ class CarouselHeader extends React.Component {
         <Carousel.Item>
           <img
             className="carousel-img"
-            src="https://www.privateislandsonline.com/uploads/resize/_909_image_eae61786dd.jpg-1074-822.jpg"
+            src="https://newhhdesktop-wpengine.netdna-ssl.com/wp-content/uploads/2017/07/Sofitel-Bora-Bora-Private-Island-03.jpg"
             alt="Third slide"
           />
 
