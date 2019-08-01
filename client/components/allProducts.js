@@ -29,7 +29,6 @@ class AllProducts extends React.Component {
     }
 
     let chunkedProducts = chunker(products, 3)
-    console.log('chunked', chunkedProducts)
 
     return (
       <div>

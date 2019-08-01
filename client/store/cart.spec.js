@@ -53,7 +53,6 @@ describe('thunk creators', () => {
       await store.dispatch(deleteItemThunk(fakeCartItem.id))
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('GET_CART')
-      console.log(actions[0].product)
       expect(actions[0].product).to.be.deep.equal()
     })
   })
