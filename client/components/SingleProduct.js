@@ -1,15 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {productThunk} from '../store/product'
-import {Row, Col, Button} from 'react-bootstrap'
+import {Row, Col, Button, Alert} from 'react-bootstrap'
+import {addToCartThunk, getCartThunk} from '../store/cart'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.productThunk(this.props.match.params.id)
+    this.props.getCartThunk()
+  }
+
+  clickHandler = event => {
+    this.props.addToCartThunk(event.target.id)
+    this.props.getCartThunk()
   }
 
   render() {
-    let {singleProduct} = this.props
+    let {singleProduct, cart} = this.props
 
     if (!singleProduct) {
       singleProduct = {}
@@ -33,9 +40,24 @@ class SingleProduct extends React.Component {
                 {singleProduct.location}
               </p>
               <p>{singleProduct.description}</p>
-              <Button type="button" variant="outline-primary">
-                Add to cart
-              </Button>
+              {singleProduct.sold ? (
+                <Alert variant="danger" className="product-alert">
+                  Island no longer available!
+                </Alert>
+              ) : cart.indexOf(singleProduct.id) > -1 ? (
+                <Alert variant="primary" className="product-alert">
+                  Item already in cart
+                </Alert>
+              ) : (
+                <Button
+                  type="button"
+                  variant="outline-primary"
+                  id={singleProduct.id}
+                  onClick={this.clickHandler}
+                >
+                  Add to cart
+                </Button>
+              )}
             </div>
           </Col>
         </Row>
@@ -45,11 +67,14 @@ class SingleProduct extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  singleProduct: state.product.singleProduct
+  singleProduct: state.product.singleProduct,
+  cart: state.cart.cart
 })
 
 const mapDispatchToProps = dispatch => ({
-  productThunk: id => dispatch(productThunk(id))
+  productThunk: id => dispatch(productThunk(id)),
+  getCartThunk: () => dispatch(getCartThunk()),
+  addToCartThunk: id => dispatch(addToCartThunk(id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
