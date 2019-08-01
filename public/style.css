@@ -86,6 +86,7 @@ a {
   justify-content: space-around;
   text-align: center;
   align-content: center;
+  box-shadow: 2px 2px 5px gray;
 }
 
 .all-products-name {
@@ -112,4 +113,31 @@ a {
 
 .cart-products-img-td {
   width: 30%;
+}
+
+.product-alert {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+#all-products-head {
+  text-align: center;
+}
+
+#header-carousel {
+  height: 400px;
+}
+
+.carousel-img {
+  width: 100%;
+}
+
+.carousel-item {
+  height: 400px;
+}
+
+.carousel-header {
+  color: white;
+  font-family: 'helvetica';
+  text-shadow: 2px 2px 5px black;
 }
