@@ -28,9 +28,6 @@ class Checkout extends React.Component {
     if (!checkout) {
       checkout = []
     }
-
-    console.log('CHECKOUT', checkout)
-
     return (
       <div>
         <h3>
