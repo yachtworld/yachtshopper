@@ -2,7 +2,12 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
-import reducer, {getCartThunk, addToCartThunk, deleteItemThunk} from './cart'
+import reducer, {
+  getCartThunk,
+  addToCartThunk,
+  deleteItemThunk,
+  checkoutThunk
+} from './cart'
 import {expect} from 'Chai'
 
 const middlewares = [thunkMiddleware]
@@ -12,7 +17,7 @@ describe('Cart routes', () => {
     let store
     let mockAxios
 
-    const initialState = []
+    const initialState = {cart: [], checkout: []}
 
     beforeEach(() => {
       mockAxios = new MockAdapter(axios)
@@ -56,11 +61,24 @@ describe('Cart routes', () => {
         expect(actions[0].product).to.be.deep.equal()
       })
     })
+
+    describe('get checkout', () => {
+      it('eventually dispatches the getCheckout action', async () => {
+        const fakeCheckout = {cart: {cart: [], checkout: [1, 2]}}
+        store = mockStore(fakeCheckout)
+        mockAxios.onPut(`/api/cart/checkout`).replyOnce(200, fakeCheckout)
+        await store.dispatch(checkoutThunk())
+        const actions = store.getActions()
+        console.log(actions[0])
+        expect(actions[0].type).to.be.equal('GET_CHECKOUT')
+        expect(actions[0].data).to.be.deep.equal(fakeCheckout.cart.checkout)
+      })
+    })
   })
 
   describe('reducer', () => {
     it('should return the initial state', () => {
-      expect(reducer(undefined, {})).deep.equal([])
+      expect(reducer(undefined, {})).deep.equal({cart: [], checkout: []})
     })
   })
 })
