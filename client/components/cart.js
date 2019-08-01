@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
 import {getCartThunk, deleteItemThunk, clearCart} from '../store/cart'
 import {Table, Button} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {numberWithCommas} from './utils'
 
 /**
  * COMPONENT
@@ -54,7 +54,7 @@ class Cart extends React.Component {
                     <img src={elem.imgUrl} className="cart-products-img" />
                   </td>
                   <td>{elem.name}</td>
-                  <td>${elem.price}</td>
+                  <td>${numberWithCommas(elem.price)}</td>
                   <td>
                     <Button
                       type="button"
@@ -73,7 +73,9 @@ class Cart extends React.Component {
                 </td>
                 <td />
                 <td>
-                  ${cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)}
+                  ${numberWithCommas(
+                    cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)
+                  )}
                 </td>
                 <td>
                   <Button
