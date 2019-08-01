@@ -26,7 +26,6 @@ describe('Cart routes', () => {
         .expect(200)
 
       expect(res.body).to.be.an('array')
-      console.log(res.body[0])
       expect(res.body).to.be.deep.equal([])
     })
 

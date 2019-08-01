@@ -1,9 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
-import {getCartThunk} from '../store/cart'
+import {getCartThunk, checkoutThunk} from '../store/cart'
 import {Table} from 'react-bootstrap'
-import {checkoutThunk} from '../store/checkoutCart'
 
 /**
  * COMPONENT
@@ -28,9 +27,6 @@ class Checkout extends React.Component {
     if (!checkout) {
       checkout = []
     }
-
-    console.log('CHECKOUT', checkout)
-
     return (
       <div>
         <h3>
@@ -68,9 +64,9 @@ class Checkout extends React.Component {
  */
 const mapState = state => {
   return {
-    cart: state.cart || [],
+    cart: state.cart.cart || [],
     products: state.product.productList,
-    checkout: state.checkout || []
+    checkout: state.cart.checkout || []
   }
 }
 

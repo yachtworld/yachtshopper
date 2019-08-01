@@ -5,6 +5,7 @@ const GET_CART = 'GET_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const CLEAR_CART = 'CLEAR_CART'
 const DELETE_ITEM = 'DELETE_ITEM'
+const GET_CHECKOUT = 'GET_CHECKOUT'
 
 //action creators
 
@@ -27,7 +28,15 @@ export const clearCart = () => ({
   type: CLEAR_CART
 })
 
-const initialState = []
+const getCheckout = data => ({
+  type: GET_CHECKOUT,
+  data
+})
+
+const initialState = {
+  cart: [],
+  checkout: []
+}
 
 //thunk
 
@@ -65,31 +74,37 @@ export const deleteItemThunk = productId => async dispatch => {
   }
 }
 
-// export const clearCartThunk= () => async dispatch => {
-//   try {
-//     const newCart = await axios.post('/api/cart/delete', {id: productId})
-//     if (!newCart.data.error) {
-//       dispatch(getCart(newCart.data))
-//     } else {
-//       dispatch(deleteItem(productId))
-//     }
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
-//reducer
+export const checkoutThunk = () => async (dispatch, getState) => {
+  try {
+    let data = getState().cart.checkout
+    await axios.put(`/api/cart/checkout`, {data})
+    if (data.length === 0) {
+      return
+    }
+    dispatch(getCheckout(data))
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      return action.data
+      return {...state, cart: action.data}
     case ADD_TO_CART:
-      return state.concat(action.product)
+      return {...state, cart: state.cart.concat(action.product)}
     case CLEAR_CART:
-      return []
+      return {...state, checkout: state.cart, cart: []}
     case DELETE_ITEM:
-      let firstIndex = state.indexOf(action.productId)
-      return state.slice(0, firstIndex).concat(state.slice(firstIndex + 1))
+      let firstIndex = state.cart.indexOf(action.productId)
+      return {
+        ...state,
+        cart: state.cart
+          .slice(0, firstIndex)
+          .concat(state.cart.slice(firstIndex + 1))
+      }
+    case GET_CHECKOUT:
+      return {...state, checkout: action.data}
     default:
       return state
   }
