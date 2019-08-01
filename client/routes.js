@@ -29,7 +29,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
-        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/cart" render={props => <Cart {...props} />} />
         <Route exact path="/checkout" component={Checkout} />
         <Route
           path="/products/:id"

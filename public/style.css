@@ -97,3 +97,19 @@ a {
   display: inline-block;
   margin-bottom: 10px;
 }
+
+.cart-products-div {
+  width: 90%;
+}
+
+.cart-products-img {
+  width: 90%;
+}
+
+.cart-products-row {
+  height: 400px;
+}
+
+.cart-products-img-td {
+  width: 30%;
+}
