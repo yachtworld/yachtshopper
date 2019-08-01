@@ -98,7 +98,7 @@ class Cart extends React.Component {
  */
 const mapState = state => {
   return {
-    cart: state.cart || [],
+    cart: state.cart.cart || [],
     products: state.product.productList
   }
 }
