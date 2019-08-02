@@ -11,7 +11,10 @@ const userNotFound = next => {
 
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({where: {email: req.body.email}})
+    const user = await User.findOne({
+      where: {email: req.body.email},
+      include: [{model: Order}]
+    })
     if (!user) {
       console.log('No such user found:', req.body.email)
       res.status(401).send('Wrong username and/or password')
@@ -32,6 +35,7 @@ router.post('/signup', async (req, res, next) => {
       email: req.body.email,
       password: req.body.password
     })
+    console.log('user', user)
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
