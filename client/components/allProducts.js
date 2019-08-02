@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import {addToCartThunk, getCartThunk} from '../store/cart'
 import {Button, Col, Row, Alert} from 'react-bootstrap'
 import Carousel from './carousel'
+import {numberWithCommas} from './utils'
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -50,7 +51,9 @@ class AllProducts extends React.Component {
                       {product.name}
                     </Link>
 
-                    <Link to={`/products/${product.id}`}>${product.price}</Link>
+                    <Link to={`/products/${product.id}`}>
+                      ${numberWithCommas(product.price)}
+                    </Link>
                     {product.sold ? (
                       <Alert variant="danger" className="product-alert">
                         Island no longer available!
