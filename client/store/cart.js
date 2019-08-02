@@ -6,6 +6,7 @@ const ADD_TO_CART = 'ADD_TO_CART'
 const CLEAR_CART = 'CLEAR_CART'
 const DELETE_ITEM = 'DELETE_ITEM'
 const GET_CHECKOUT = 'GET_CHECKOUT'
+const GET_ORDER = 'GET_ORDER'
 
 //action creators
 
@@ -32,6 +33,11 @@ export const clearCart = () => ({
 const getCheckout = data => ({
   type: GET_CHECKOUT,
   data
+})
+
+const getOrder = orderData => ({
+  type: GET_ORDER,
+  orderData
 })
 
 const initialState = {
