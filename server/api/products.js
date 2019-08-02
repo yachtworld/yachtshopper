@@ -19,3 +19,13 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+// for admin to add a product
+router.post('/', async (req, res, next) => {
+  try {
+    const product = await Products.create(req.body)
+    res.json(product)
+  } catch (err) {
+    next(err)
+  }
+})

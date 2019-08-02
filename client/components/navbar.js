@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {clearCart} from '../store/cart'
 import {Navbar as NavbarReact, Nav} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
   <div>
     <NavbarReact bg="light" variant="light">
       <NavbarReact.Brand>Island World</NavbarReact.Brand>
@@ -38,6 +37,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       <LinkContainer to="/cart">
         <Nav.Link>Cart</Nav.Link>
       </LinkContainer>
+
+      {isAdmin ? (
+        <React.Fragment>
+          {/* The navbar will show these links after you log in */}
+          <LinkContainer to="/edit-products">
+            <Nav.Link>Edit Products</Nav.Link>
+          </LinkContainer>
+        </React.Fragment>
+      ) : (
+        <React.Fragment />
+      )}
     </NavbarReact>
     <hr />
   </div>
@@ -48,7 +58,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    isAdmin: state.user.admin
   }
 }
 

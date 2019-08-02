@@ -3,7 +3,7 @@ import axios from 'axios'
 //Action types
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const SINGLE_PRODUCT = 'SINGLE_PRODUCT'
-
+export const ADD_PRODUCT = 'ADD_PRODUCT'
 //action creators
 
 export const getProducts = data => ({
@@ -13,6 +13,11 @@ export const getProducts = data => ({
 
 const singleProduct = product => ({
   type: SINGLE_PRODUCT,
+  product
+})
+
+export const addProduct = product => ({
+  type: ADD_PRODUCT,
   product
 })
 
@@ -41,6 +46,17 @@ export const productThunk = id => async dispatch => {
   }
 }
 
+export const addProductThunk = product => {
+  return async dispatch => {
+    try {
+      await axios.post('api/products', product)
+      dispatch(addProduct(product))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 //reducer
 
 export default function(state = initialState, action) {
@@ -49,6 +65,8 @@ export default function(state = initialState, action) {
       return {...state, productList: action.data}
     case SINGLE_PRODUCT:
       return {...state, singleProduct: action.product}
+    case ADD_PRODUCT:
+      return {...state, products: [...state.products, action.product]}
     default:
       return state
   }
