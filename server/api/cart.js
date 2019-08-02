@@ -36,8 +36,16 @@ router.put('/checkout', async (req, res, next) => {
       const order = await user.getProducts()
       user.setProducts([])
       let userOrders = await Order.findAll({where: {userId: req.user.id}})
-      let orderId = Math.max(userOrders.map(product => product.orderId))
-      if (orderId) orderId++
+      let orderId = Math.max(
+        userOrders.map(product => parseInt(product.orderId, 10))
+      )
+      console.log('orderId:', orderId)
+      console.log(
+        'user Orders:',
+        userOrders.map(product => typeof product.orderId)
+      )
+
+      if (orderId) orderId += 1
       else orderId = 1
       order.forEach(async item => {
         await Order.create({
