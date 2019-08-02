@@ -36,9 +36,15 @@ router.put('/checkout', async (req, res, next) => {
       const order = await user.getProducts()
       user.setProducts([])
       let userOrders = await Order.findAll({where: {userId: req.user.id}})
-      let orderId = Math.max(userOrders.map(product => product.orderId))
-      if (orderId) orderId++
-      else orderId = 1
+      let orderId = Math.max(
+        ...userOrders.map(product => parseInt(product.orderId, 10))
+      )
+
+      if (orderId) {
+        orderId += 1
+      } else {
+        orderId = 1
+      }
       order.forEach(async item => {
         await Order.create({
           userId: user.id,
@@ -52,6 +58,7 @@ router.put('/checkout', async (req, res, next) => {
     res.sendStatus(200)
   } catch (error) {
     res.send({error: 'cart not found'})
+    console.log(error)
   }
 })
 
