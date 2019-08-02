@@ -24,8 +24,12 @@ class Cart extends React.Component {
   }
 
   handleCheckout() {
-    this.props.clearCart()
-    this.props.history.push('/checkout')
+    if (this.props.user.id) {
+      this.props.clearCart()
+      this.props.history.push('/checkout')
+    } else {
+      this.props.history.push('/login')
+    }
   }
 
   render() {
@@ -101,7 +105,8 @@ class Cart extends React.Component {
 const mapState = state => {
   return {
     cart: state.cart.cart || [],
-    products: state.product.productList
+    products: state.product.productList,
+    user: state.user
   }
 }
 
