@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {productThunk} from '../store/product'
 import {Row, Col, Button, Alert} from 'react-bootstrap'
 import {addToCartThunk, getCartThunk} from '../store/cart'
+import {numberWithCommas} from './utils'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -31,7 +32,11 @@ class SingleProduct extends React.Component {
           <Col className="border-col">
             <div className="single-product-info">
               <h2>{singleProduct.name}</h2>
-              <p>${singleProduct.price}</p>
+              <p>
+                ${singleProduct.price
+                  ? numberWithCommas(singleProduct.price)
+                  : ''}
+              </p>
               <p>
                 <img
                   src="https://i.pinimg.com/originals/29/93/fd/2993fd151e2e1cab871aec155e22cbcc.png"

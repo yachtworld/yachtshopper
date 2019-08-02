@@ -19,9 +19,10 @@ const addToCart = product => ({
   product
 })
 
-const deleteItem = productId => ({
+const deleteItem = (productId, currentCart) => ({
   type: DELETE_ITEM,
-  productId
+  productId,
+  currentCart
 })
 
 export const clearCart = () => ({
@@ -61,13 +62,13 @@ export const addToCartThunk = id => async dispatch => {
   }
 }
 
-export const deleteItemThunk = productId => async dispatch => {
+export const deleteItemThunk = productId => async (dispatch, getState) => {
   try {
     const newCart = await axios.put('/api/cart/delete', {id: productId})
     if (!newCart.data.error) {
       dispatch(getCart(newCart.data))
     } else {
-      dispatch(deleteItem(productId))
+      dispatch(deleteItem(productId, getState().cart.cart))
     }
   } catch (error) {
     console.error(error)
@@ -96,7 +97,9 @@ export default function(state = initialState, action) {
     case CLEAR_CART:
       return {...state, checkout: state.cart, cart: []}
     case DELETE_ITEM:
-      let firstIndex = state.cart.indexOf(action.productId)
+      let firstIndex = action.currentCart.indexOf(
+        parseInt(action.productId, 10)
+      )
       return {
         ...state,
         cart: state.cart
