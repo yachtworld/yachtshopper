@@ -42,7 +42,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         <React.Fragment>
           {/* The navbar will show these links after you log in */}
           <LinkContainer to="/edit-products">
-            <Nav.Link>Edit Products</Nav.Link>
+            <Nav.Link>Admin Panel</Nav.Link>
           </LinkContainer>
         </React.Fragment>
       ) : (
