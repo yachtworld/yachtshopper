@@ -37,12 +37,6 @@ class Routes extends Component {
           render={routeProps => <SingleProduct {...routeProps} />}
         />
         <Route exact path="/edit-products" component={AdminPage} />
-        {isAdmin && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route exact path="/edit-products" component={AllProducts} />
-          </Switch>
-        )}
 
         {isLoggedIn && (
           <Switch>
@@ -51,6 +45,12 @@ class Routes extends Component {
           </Switch>
         )}
 
+        {isAdmin && (
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+            <Route exact path="/edit-products" component={AllProducts} />
+          </Switch>
+        )}
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
       </Switch>
