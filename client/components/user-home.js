@@ -15,6 +15,8 @@ class UserHome extends React.Component {
     let {email, name, address, orders} = this.props
     let orderObj = {}
     orders.forEach(product => {
+      let date = new Date(product.createdAt)
+      product.createdAt = `${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
       if (orderObj[product.orderId]) {
         orderObj[product.orderId].push(product)
       } else {
