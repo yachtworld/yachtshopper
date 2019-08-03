@@ -17,7 +17,7 @@ describe('Cart routes', () => {
     let store
     let mockAxios
 
-    const initialState = {cart: [], checkout: []}
+    const initialState = {cart: [], checkout: [], orders: []}
 
     beforeEach(() => {
       mockAxios = new MockAdapter(axios)
@@ -78,7 +78,11 @@ describe('Cart routes', () => {
 
   describe('reducer', () => {
     it('should return the initial state', () => {
-      expect(reducer(undefined, {})).deep.equal({cart: [], checkout: []})
+      expect(reducer(undefined, {})).deep.equal({
+        cart: [],
+        checkout: [],
+        orders: []
+      })
     })
   })
 })
