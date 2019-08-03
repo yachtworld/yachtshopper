@@ -12,6 +12,8 @@ import Checkout from './components/Checkout'
 import SingleProduct from './components/SingleProduct'
 import AdminPage from './components/adminPage'
 
+import NotFound from './components/notFound'
+
 /**
  * COMPONENT
  */
@@ -43,11 +45,12 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             {isAdmin && <Route exact path="/admin" component={AdminPage} />}
+            <Route component={NotFound} />
           </Switch>
         )}
 
-        {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        {/* Displays our Not Found component as a fallback */}
+        <Route component={NotFound} />
       </Switch>
     )
   }
