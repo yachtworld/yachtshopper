@@ -49,7 +49,8 @@ router.put('/checkout', async (req, res, next) => {
         await Order.create({
           userId: user.id,
           productId: item.id,
-          orderId: orderId
+          orderId: orderId,
+          productName: item.name
         })
         await Products.update({sold: true}, {where: {id: item.id}})
       })

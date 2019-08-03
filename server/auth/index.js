@@ -51,6 +51,23 @@ router.post('/logout', (req, res) => {
   res.redirect('/')
 })
 
+router.get('/me/orders', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const userOrders = await Order.findAll({
+        where: {
+          userId: req.user.id
+        }
+      })
+      res.json(userOrders)
+    } else {
+      userNotFound(next)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get('/me', (req, res, next) => {
   try {
     if (req.user) {

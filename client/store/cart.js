@@ -35,14 +35,15 @@ const getCheckout = data => ({
   data
 })
 
-const getOrder = orderData => ({
+const getOrder = data => ({
   type: GET_ORDER,
-  orderData
+  data
 })
 
 const initialState = {
   cart: [],
-  checkout: []
+  checkout: [],
+  orders: []
 }
 
 //thunk
@@ -94,6 +95,19 @@ export const checkoutThunk = () => async (dispatch, getState) => {
   }
 }
 
+export const getOrderThunk = () => async dispatch => {
+  try {
+    const {data} = await axios.get('/auth/me/orders')
+    if (data.length === 0) {
+      return
+    }
+    dispatch(getOrder(data))
+    console.log(data)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
@@ -114,6 +128,8 @@ export default function(state = initialState, action) {
       }
     case GET_CHECKOUT:
       return {...state, checkout: action.data}
+    case GET_ORDER:
+      return {...state, orders: action.data}
     default:
       return state
   }

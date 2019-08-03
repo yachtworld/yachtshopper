@@ -141,3 +141,13 @@ a {
   font-family: 'helvetica';
   text-shadow: 2px 2px 5px black;
 }
+
+#user-info {
+  border: 1px solid gray;
+  border-radius: 15px;
+}
+
+.user-order {
+  border: 1px solid gray;
+  border-radius: 15px;
+}
