@@ -102,7 +102,6 @@ export const getOrderThunk = () => async dispatch => {
       return
     }
     dispatch(getOrder(data))
-    console.log(data)
   } catch (error) {
     console.error(error)
   }
