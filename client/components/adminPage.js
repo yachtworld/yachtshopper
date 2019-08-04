@@ -31,7 +31,6 @@ class AdminPage extends React.Component {
   }
 
   render() {
-    console.log('HIII')
     return (
       <div>
         <p>HELLO YO</p>

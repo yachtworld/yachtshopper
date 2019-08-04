@@ -19,15 +19,3 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-router.get('/orders', async (req, res, next) => {
-  try {
-    const userOrders = await Order.findAll({
-      where: {
-        userId: req.user.id
-      }
-    })
-    res.json(userOrders)
-  } catch (error) {
-    next(error)
-  }
-})
