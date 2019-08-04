@@ -2,21 +2,25 @@
 
 import {expect} from 'chai'
 import React from 'react'
-import enzyme, {shallow} from 'enzyme'
+import enzyme, {shallow, render} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import {UserHome} from './user-home'
+import UserHome from './user-home'
+import store from '../store'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
 describe('UserHome', () => {
-  let userHome
+  let renderUserHome
 
   beforeEach(() => {
-    userHome = shallow(<UserHome email="cody@email.com" />)
+    renderUserHome = render(<UserHome store={store} />)
+    //console.log(renderUserHome.debug)
+    // console.log(renderUserHome)
+    // console.log(renderUserHome.props())
   })
 
-  it('renders the email in an h3', () => {
-    expect(userHome.find('h3').text()).to.be.equal('Welcome, cody@email.com')
+  it('generates a user home div', () => {
+    expect(renderUserHome.find('#user-home')._root.length).to.equal(1)
   })
 })

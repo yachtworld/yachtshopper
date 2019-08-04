@@ -46,7 +46,7 @@ class Cart extends React.Component {
       cartProducts = cart.map(elem => products[elem - 1])
     }
 
-    return (
+    return cartProducts.length > 0 ? (
       <div>
         <h3>
           Your Cart:
@@ -95,6 +95,8 @@ class Cart extends React.Component {
           </Table>
         </h3>
       </div>
+    ) : (
+      <h2>Your cart is currently empty!</h2>
     )
   }
 }

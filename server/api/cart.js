@@ -40,7 +40,7 @@ router.put('/checkout', async (req, res, next) => {
         ...userOrders.map(product => parseInt(product.orderId, 10))
       )
 
-      if (orderId) {
+      if (orderId && isFinite(orderId)) {
         orderId += 1
       } else {
         orderId = 1
@@ -49,7 +49,8 @@ router.put('/checkout', async (req, res, next) => {
         await Order.create({
           userId: user.id,
           productId: item.id,
-          orderId: orderId
+          orderId: orderId,
+          productName: item.name
         })
         await Products.update({sold: true}, {where: {id: item.id}})
       })
@@ -58,7 +59,6 @@ router.put('/checkout', async (req, res, next) => {
     res.sendStatus(200)
   } catch (error) {
     res.send({error: 'cart not found'})
-    console.log(error)
   }
 })
 
@@ -75,4 +75,9 @@ router.put('/delete', async (req, res, next) => {
   } catch (error) {
     res.send({error: 'cart not found'})
   }
+})
+
+process.on('unhandledRejection', error => {
+  // Will print "unhandledRejection err is not defined"
+  console.log('unhandledRejection', error.message)
 })
