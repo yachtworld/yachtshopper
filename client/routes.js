@@ -30,9 +30,9 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={AllProducts} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/cart" render={props => <Cart {...props} />} />
         <Route exact path="/checkout" component={Checkout} />
@@ -50,7 +50,7 @@ class Routes extends Component {
             <Route component={NotFound} />
           </Switch>
         )}
-
+        <Route exact path="/" component={AllProducts} />
         {/* Displays our Not Found component as a fallback */}
         <Route component={NotFound} />
       </Switch>
@@ -74,7 +74,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
-      dispatch(productsThunk())
+      // dispatch(productsThunk())
     }
   }
 }

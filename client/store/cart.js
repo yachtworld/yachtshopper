@@ -48,13 +48,26 @@ const initialState = {
 
 //thunk
 
-export const getCartThunk = () => async dispatch => {
+export const getCartThunk = () => async (dispatch, getState) => {
   try {
-    const {data} = await axios.get('/api/cart')
-    if (data.length === 0) {
-      return
+    if (getState().user.id) {
+      console.log('user exists', getState().user.id)
+      let {data} = await axios.get('/api/cart')
+      dispatch(getCart(data))
+      console.log('THIS DATA IS BEING SENT', data)
+    } else {
+      console.log('no user logged in')
+      dispatch(getCart(getState().cart.cart))
     }
-    dispatch(getCart(data))
+
+    // console.log('cart data', data)
+    // console.log('state', getState())
+    // if (data.length === 0) {
+    //   // data = getState().cart.cart
+    //   // console.log('no data returned')
+    //   return
+    // }
+    // console.log(data)
   } catch (error) {
     console.error(error)
   }
@@ -73,6 +86,7 @@ export const deleteItemThunk = productId => async (dispatch, getState) => {
   try {
     const newCart = await axios.put('/api/cart/delete', {id: productId})
     if (!newCart.data.error) {
+      console.log('delete Item Thunk')
       dispatch(getCart(newCart.data))
     } else {
       dispatch(deleteItem(productId, getState().cart.cart))
@@ -112,7 +126,7 @@ export default function(state = initialState, action) {
     case GET_CART:
       return {...state, cart: action.data}
     case ADD_TO_CART:
-      return {...state, cart: state.cart.concat(action.product)}
+      return {...state, cart: [...state.cart, action.product]}
     case CLEAR_CART:
       return {...state, checkout: state.cart, cart: []}
     case DELETE_ITEM:
