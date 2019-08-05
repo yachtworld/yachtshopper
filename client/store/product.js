@@ -22,9 +22,10 @@ export const addProduct = product => ({
   product
 })
 
-export const deleteProduct = id => ({
+export const deleteProduct = (id, currentProductList) => ({
   type: DELETE_PRODUCT,
-  id
+  id,
+  currentProductList
 })
 
 const initialState = {
@@ -63,15 +64,17 @@ export const addProductThunk = product => {
   }
 }
 
-export const deleteProductThunk = id => {
-  return async dispatch => {
-    try {
-      await axios.delete(`/api/products/${id}`)
-      //dispatch(deleteProduct(id))
-      dispatch(productsThunk())
-    } catch (error) {
-      console.error(error)
+export const deleteProductThunk = id => async (dispatch, getState) => {
+  try {
+    const {data} = await axios.put('/api/products/delete', {id})
+
+    if (!data.error) {
+      dispatch(getProducts(data))
+    } else {
+      dispatch(deleteProduct(id, getState().product.productList))
     }
+  } catch (error) {
+    console.error(error)
   }
 }
 
@@ -87,7 +90,9 @@ export default function(state = initialState, action) {
       return {...state, productList: [...state.productList, action.product]}
 
     case DELETE_PRODUCT:
-      let firstIndex = action.productList.indexOf(parseInt(action.id, 10))
+      let firstIndex = action.currentProductList.indexOf(
+        parseInt(action.id, 10)
+      )
       return {
         ...state,
         productList: state.productList
