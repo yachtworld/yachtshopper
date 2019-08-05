@@ -25,26 +25,9 @@ class AllProducts extends React.Component {
       products = []
     }
 
-    //splits array up into sub-arrays for proper rendering
-    // const chunker = function(arr, chunkSize) {
-    //   let row = []
-    //   for (let i = 0; i < arr.length; i += chunkSize)
-    //     row.push(arr.slice(i, i + chunkSize))
-    //   return row
-    // }
-
-    // let chunkedProducts = chunker(products, 3)
-
-    // remove chunkedproducts
-    // map through the products
-    // instead of returning a new row, return columns and set the size (3/4?)
-    // idea is that it'll all wrap
-
     return (
       <div>
         <Carousel id="header-carousel" />
-        {/* {chunkedProducts.map((productArr, index) => {
-          return ( */}
         <Row className="all-products-row">
           {products.map(product => {
             return (
@@ -83,8 +66,6 @@ class AllProducts extends React.Component {
             )
           })}
         </Row>
-        {/* )
-        })} */}
       </div>
     )
   }
