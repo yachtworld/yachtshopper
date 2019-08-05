@@ -4,14 +4,14 @@ const {User, Products, Order} = require('../db/models')
 module.exports = router
 
 // middleware for security: checking that our current user is the same as the one on our session
-router.use(function(req, res, next) {
-  if (req.user.id !== req.session.passport.user) {
-    res
-      .sendStatus(405)
-      .send({error: 'User validation error. Method not allowed.'})
-  }
-  next()
-})
+// router.use(function(req, res, next) {
+//   if (req.user.id !== req.session.passport.user) {
+//     res
+//       .sendStatus(405)
+//       .send({error: 'User validation error. Method not allowed.'})
+//   }
+//   next()
+// })
 
 router.get('/', async (req, res, next) => {
   try {
@@ -19,13 +19,6 @@ router.get('/', async (req, res, next) => {
     if (req.user.id === req.session.passport.user) {
       const user = await User.findByPk(req.session.passport.user)
       const userCart = await user.getProducts()
-      // console.log(req.user.id, userCart)
-      console.log('session', req.session)
-      console.log('session user', req.session.id)
-      console.log('session passport user', req.session.passport.user)
-      console.log('user id', req.user.id)
-      // console.log('user', user)
-      // console.log('user cart', userCart)
       res.json(userCart.map(item => item.id))
     }
     res.status(500).send([])
