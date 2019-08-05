@@ -33,7 +33,6 @@ class AdminPage extends React.Component {
   render() {
     return (
       <div>
-        <p>HELLO YO</p>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">Name:</label>
           <input
