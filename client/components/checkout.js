@@ -30,7 +30,7 @@ class Checkout extends React.Component {
   }
 
   render() {
-    let {products, checkout} = this.props
+    let {products, checkout, isLoggedIn} = this.props
 
     if (!products) {
       products = []
@@ -72,7 +72,7 @@ class Checkout extends React.Component {
             </tbody>
           </Table>
         </h3>
-        {this.props.user ? (
+        {isLoggedIn ? (
           <div />
         ) : !this.state.submitted ? (
           <div>
@@ -106,7 +106,8 @@ const mapState = state => {
   return {
     cart: state.cart.cart || [],
     products: state.product.productList,
-    checkout: state.cart.checkout || []
+    checkout: state.cart.checkout || [],
+    isLoggedIn: !!state.user.id
   }
 }
 

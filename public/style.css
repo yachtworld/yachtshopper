@@ -133,10 +133,11 @@ a {
 }
 
 .carousel-item {
-  height: 500px;
+  height: 350px;
 }
 
-.carousel-header {
+.carousel-header,
+.carousel-body-txt {
   color: white;
   font-family: 'helvetica';
   text-shadow: 2px 2px 5px black;
