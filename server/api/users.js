@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Order} = require('../db/models')
+const {User} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -10,10 +10,14 @@ router.get('/', async (req, res, next) => {
       // send everything to anyone who asks!
       attributes: ['id', 'email']
     })
-    if (req.user.admin === true) {
-      res.json(users)
+    if (req.user) {
+      if (req.user.admin === true) {
+        res.json(users)
+      } else {
+        res.status(500).send('You are not authorized to view this page.')
+      }
     } else {
-      res.send('You are not authorized to view this page.')
+      res.status(500).send('You are not authorized to view this page.')
     }
   } catch (err) {
     next(err)
