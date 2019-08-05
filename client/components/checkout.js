@@ -30,7 +30,7 @@ class Checkout extends React.Component {
   }
 
   render() {
-    let {products, checkout} = this.props
+    let {products, checkout, user} = this.props
 
     if (!products) {
       products = []
@@ -72,7 +72,7 @@ class Checkout extends React.Component {
             </tbody>
           </Table>
         </h3>
-        {this.props.user ? (
+        {user ? (
           <div />
         ) : !this.state.submitted ? (
           <div>

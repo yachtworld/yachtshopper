@@ -21,7 +21,7 @@ class CarouselHeader extends React.Component {
             <h3 className="carousel-header">
               Welcome to Island World! Paradise at Your Fingertips
             </h3>
-            <p>Find your private island today</p>
+            <p className="carousel-body-txt">Find your private island today</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -35,7 +35,7 @@ class CarouselHeader extends React.Component {
             <h3 className="carousel-header">
               Welcome to Island World! Paradise at Your Fingertips
             </h3>
-            <p>For the discerning buyer</p>
+            <p className="carousel-body-txt">For the discerning buyer</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -49,7 +49,7 @@ class CarouselHeader extends React.Component {
             <h3 className="carousel-header">
               Welcome to Island World! Paradise at Your Fingertips
             </h3>
-            <p>
+            <p className="carousel-body-txt">
               Visit our sister website Yachtworld for all your boating needs!
             </p>
           </Carousel.Caption>
