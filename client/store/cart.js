@@ -51,23 +51,11 @@ const initialState = {
 export const getCartThunk = () => async (dispatch, getState) => {
   try {
     if (getState().user.id) {
-      console.log('user exists', getState().user.id)
       let {data} = await axios.get('/api/cart')
       dispatch(getCart(data))
-      console.log('THIS DATA IS BEING SENT', data)
     } else {
-      console.log('no user logged in')
       dispatch(getCart(getState().cart.cart))
     }
-
-    // console.log('cart data', data)
-    // console.log('state', getState())
-    // if (data.length === 0) {
-    //   // data = getState().cart.cart
-    //   // console.log('no data returned')
-    //   return
-    // }
-    // console.log(data)
   } catch (error) {
     console.error(error)
   }
