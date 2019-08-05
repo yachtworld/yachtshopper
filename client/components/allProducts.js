@@ -45,44 +45,44 @@ class AllProducts extends React.Component {
         <Carousel id="header-carousel" />
         {/* {chunkedProducts.map((productArr, index) => {
           return ( */}
-        {/* <Row className="all-products-div" key={index}> */}
-        {products.map(product => {
-          return (
-            <Col key={product.id} className="all-products-row">
-              <img src={product.imgUrl} className="all-products-img" />
-              <Link
-                to={`/products/${product.id}`}
-                className="all-products-name"
-              >
-                {product.name}
-              </Link>
-
-              <Link to={`/products/${product.id}`}>
-                ${numberWithCommas(product.price)}
-              </Link>
-              {product.sold ? (
-                <Alert variant="danger" className="product-alert">
-                  Island no longer available!
-                </Alert>
-              ) : this.props.cart.indexOf(product.id) > -1 ? (
-                <Alert variant="primary" className="product-alert">
-                  Item already in cart
-                </Alert>
-              ) : (
-                <Button
-                  type="button"
-                  id={product.id}
-                  onClick={this.clickHandler}
-                  variant="primary"
-                  className="all-products-btn"
+        <Row className="all-products-row">
+          {products.map(product => {
+            return (
+              <Col md="4" key={product.id} className="all-products-item">
+                <img src={product.imgUrl} className="all-products-img" />
+                <Link
+                  to={`/products/${product.id}`}
+                  className="all-products-name"
                 >
-                  Add to cart
-                </Button>
-              )}
-            </Col>
-          )
-        })}
-        {/* </Row> */}
+                  {product.name}
+                </Link>
+
+                <Link to={`/products/${product.id}`}>
+                  ${numberWithCommas(product.price)}
+                </Link>
+                {product.sold ? (
+                  <Alert variant="danger" className="product-alert">
+                    Island no longer available!
+                  </Alert>
+                ) : this.props.cart.indexOf(product.id) > -1 ? (
+                  <Alert variant="primary" className="product-alert">
+                    Item already in cart
+                  </Alert>
+                ) : (
+                  <Button
+                    type="button"
+                    id={product.id}
+                    onClick={this.clickHandler}
+                    variant="primary"
+                    className="all-products-btn"
+                  >
+                    Add to cart
+                  </Button>
+                )}
+              </Col>
+            )
+          })}
+        </Row>
         {/* )
         })} */}
       </div>
