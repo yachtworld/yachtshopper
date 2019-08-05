@@ -24,12 +24,8 @@ class Cart extends React.Component {
   }
 
   handleCheckout() {
-    if (this.props.user.id) {
-      this.props.clearCart()
-      this.props.history.push('/checkout')
-    } else {
-      this.props.history.push('/login')
-    }
+    this.props.clearCart()
+    this.props.history.push('/checkout')
   }
 
   render() {

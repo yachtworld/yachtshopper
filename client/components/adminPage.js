@@ -1,6 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {addProductThunk} from '../store/product'
+import {
+  addProductThunk,
+  productsThunk,
+  deleteProductThunk
+} from '../store/product'
 
 const defaultState = {
   name: '',
@@ -18,10 +22,19 @@ class AdminPage extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.productsThunk()
   }
 
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
+  }
+
+  handleClick(event) {
+    this.props.deleteProductThunk(event.target.id)
   }
 
   handleSubmit(event) {
@@ -31,6 +44,10 @@ class AdminPage extends React.Component {
   }
 
   render() {
+    let {products} = this.props
+    if (!products) {
+      products = []
+    }
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -75,13 +92,55 @@ class AdminPage extends React.Component {
           />
           <input type="submit" value="Submit" />
         </form>
+
+        <div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <b>Product Name</b>
+                </td>
+                <td>
+                  <b>Price</b>
+                </td>
+                <td>
+                  <b>Location</b>
+                </td>
+              </tr>
+              {products.map(product => {
+                return (
+                  <tr key={product.id}>
+                    <td>{product.name}</td>
+                    <td>{product.price}</td>
+                    <td>{product.location}</td>
+                    <td>
+                      <button
+                        type="button"
+                        id={product.id}
+                        onClick={this.handleClick}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     )
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  addProductThunk: product => dispatch(addProductThunk(product))
+const mapStateToProps = state => ({
+  products: state.product.productList
 })
 
-export default connect(null, mapDispatchToProps)(AdminPage)
+const mapDispatchToProps = dispatch => ({
+  addProductThunk: product => dispatch(addProductThunk(product)),
+  productsThunk: () => dispatch(productsThunk()),
+  deleteProductThunk: productId => dispatch(deleteProductThunk(productId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminPage)
