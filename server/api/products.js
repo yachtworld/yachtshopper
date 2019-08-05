@@ -29,3 +29,17 @@ router.post('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    console.log('REQ BODY', req.params.id)
+    await Products.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.status(204)
+  } catch (err) {
+    next(err)
+  }
+})
