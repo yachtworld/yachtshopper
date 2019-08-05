@@ -96,7 +96,7 @@ class AdminPage extends React.Component {
         <div>
           <table>
             <tbody>
-              <tr>
+              <tr key="0">
                 <td>
                   <b>Product Name</b>
                 </td>
