@@ -4,6 +4,7 @@ import axios from 'axios'
 export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const SINGLE_PRODUCT = 'SINGLE_PRODUCT'
 export const ADD_PRODUCT = 'ADD_PRODUCT'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 //action creators
 
 export const getProducts = data => ({
@@ -19,6 +20,11 @@ const singleProduct = product => ({
 export const addProduct = product => ({
   type: ADD_PRODUCT,
   product
+})
+
+export const deleteProduct = id => ({
+  type: DELETE_PRODUCT,
+  id
 })
 
 const initialState = {
@@ -57,6 +63,18 @@ export const addProductThunk = product => {
   }
 }
 
+export const deleteProductThunk = id => {
+  return async dispatch => {
+    try {
+      await axios.delete(`/api/products/${id}`)
+      //dispatch(deleteProduct(id))
+      dispatch(productsThunk())
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
 //reducer
 
 export default function(state = initialState, action) {
@@ -66,7 +84,16 @@ export default function(state = initialState, action) {
     case SINGLE_PRODUCT:
       return {...state, singleProduct: action.product}
     case ADD_PRODUCT:
-      return {...state, products: [...state.products, action.product]}
+      return {...state, productList: [...state.productList, action.product]}
+
+    case DELETE_PRODUCT:
+      let firstIndex = action.productList.indexOf(parseInt(action.id, 10))
+      return {
+        ...state,
+        productList: state.productList
+          .slice(0, firstIndex)
+          .concat(state.productList.slice(firstIndex + 1))
+      }
     default:
       return state
   }
