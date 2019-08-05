@@ -65,9 +65,7 @@ a {
 
 .all-products-row {
   width: 90%;
-  align-self: center;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin-left: 5%;
   margin-right: 5%;
   padding-top: 20px;
@@ -80,9 +78,9 @@ a {
   flex-direction: column;
   text-align: center;
   align-content: center;
-  box-shadow: 2px 2px 5px gray;
+  box-shadow: 2px 2px 2px gray;
   padding: 5px;
-  padding-bottom: 16px;
+  padding-bottom: 15px;
 }
 
 .all-products-name {
