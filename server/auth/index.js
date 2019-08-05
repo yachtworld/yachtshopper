@@ -50,7 +50,7 @@ router.post('/logout', (req, res) => {
   // req.session.user = null
   req.session.destroy()
   console.log('session destroyed', req.session)
-  res.redirect('/products')
+  res.redirect('/')
 })
 
 router.get('/me/orders', async (req, res, next) => {

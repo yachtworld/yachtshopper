@@ -18,7 +18,7 @@ router.get('/', async (req, res, next) => {
       // console.log('user cart', userCart)
       res.json(userCart.map(item => item.id))
     }
-    res.sendStatus(500)
+    res.status(500).send([])
   } catch (error) {
     res.send([])
   }

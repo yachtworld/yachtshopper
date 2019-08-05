@@ -30,7 +30,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={AllProducts} />
+
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
@@ -50,7 +50,7 @@ class Routes extends Component {
             <Route component={NotFound} />
           </Switch>
         )}
-
+        <Route exact path="/" component={AllProducts} />
         {/* Displays our Not Found component as a fallback */}
         <Route component={NotFound} />
       </Switch>
