@@ -25,11 +25,12 @@ class AllProducts extends React.Component {
       products = []
     }
 
+    //splits array up into sub-arrays for proper rendering
     const chunker = function(arr, chunkSize) {
-      let R = []
+      let row = []
       for (let i = 0; i < arr.length; i += chunkSize)
-        R.push(arr.slice(i, i + chunkSize))
-      return R
+        row.push(arr.slice(i, i + chunkSize))
+      return row
     }
 
     let chunkedProducts = chunker(products, 3)
