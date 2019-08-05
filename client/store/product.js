@@ -64,21 +64,6 @@ export const addProductThunk = product => {
   }
 }
 
-// export const deleteProductThunk = id => {
-//   return async (dispatch, getState) => {
-//     try {
-//       const newCart = await axios.put('/api/products/delete', {id})
-//       if (!newCart.data.error) {
-//         dispatch(getProducts(newCart.data))
-//       } else {
-//         dispatch(deleteProduct(id, getState().product.productList))
-//       }
-//     } catch (error) {
-//       console.error(error)
-//     }
-//   }
-// }
-
 export const deleteProductThunk = id => async (dispatch, getState) => {
   try {
     const {data} = await axios.put('/api/products/delete', {id})
