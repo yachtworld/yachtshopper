@@ -2,16 +2,31 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {productsThunk} from '../store/product'
 import {getCartThunk, checkoutThunk} from '../store/cart'
-import {Table} from 'react-bootstrap'
+import {Table, Form, Button} from 'react-bootstrap'
 import {numberWithCommas} from './utils'
 
 /**
  * COMPONENT
  */
 class Checkout extends React.Component {
+  constructor() {
+    super()
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = {
+      submitted: false
+    }
+  }
+
   componentDidMount() {
     this.props.productsThunk()
     this.props.checkoutThunk()
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.setState({
+      submitted: true
+    })
   }
 
   render() {
@@ -57,6 +72,28 @@ class Checkout extends React.Component {
             </tbody>
           </Table>
         </h3>
+        {this.props.user ? (
+          <div />
+        ) : !this.state.submitted ? (
+          <div>
+            <Form onSubmit={this.handleSubmit} className="login-form">
+              <Form.Label>Enter your email for receipt:</Form.Label>
+              <Form.Control
+                name="email"
+                type="email"
+                placeholder="Enter email"
+              />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+              <Button type="submit" variant="success">
+                Submit
+              </Button>
+            </Form>
+          </div>
+        ) : (
+          <div>Thanks for your submission, we will email you your receipt.</div>
+        )}
       </div>
     )
   }

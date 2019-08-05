@@ -31,8 +31,8 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={AllProducts} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/cart" render={props => <Cart {...props} />} />
         <Route exact path="/checkout" component={Checkout} />
@@ -74,7 +74,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
-      dispatch(productsThunk())
+      // dispatch(productsThunk())
     }
   }
 }

@@ -5,9 +5,20 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.user.id)
-    const userCart = await user.getProducts()
-    res.json(userCart.map(item => item.id))
+    // console.log('user', req.user)
+    if (req.user.id === req.session.passport.user) {
+      const user = await User.findByPk(req.session.passport.user)
+      const userCart = await user.getProducts()
+      // console.log(req.user.id, userCart)
+      console.log('session', req.session)
+      console.log('session user', req.session.id)
+      console.log('session passport user', req.session.passport.user)
+      console.log('user id', req.user.id)
+      // console.log('user', user)
+      // console.log('user cart', userCart)
+      res.json(userCart.map(item => item.id))
+    }
+    res.sendStatus(500)
   } catch (error) {
     res.send([])
   }
