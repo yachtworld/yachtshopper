@@ -44,10 +44,10 @@ class Checkout extends React.Component {
       checkout = []
     }
     return (
-      <div>
-        <h3>
-          Success! Your order has been submitted:
-          <Table className="cart-products-div">
+      <div className="submit-order">
+        <h3>Success! Your order has been submitted:</h3>
+        <Table className="cart-products-div">
+          <h4>
             <tbody>
               {cartProducts.map((elem, index) => (
                 <tr key={index} className="cart-products-row">
@@ -59,19 +59,23 @@ class Checkout extends React.Component {
                 </tr>
               ))}
               <tr>
-                <td>
-                  <h4>Order Total:</h4>
-                </td>
+                <td>Order Total:</td>
                 <td />
                 <td>
-                  ${numberWithCommas(
-                    cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)
-                  )}
+                  <b>
+                    ${numberWithCommas(
+                      cartProducts.reduce(
+                        (a, b) => a + parseInt(b.price, 10),
+                        0
+                      )
+                    )}
+                  </b>
                 </td>
               </tr>
             </tbody>
-          </Table>
-        </h3>
+          </h4>
+        </Table>
+
         {isLoggedIn ? (
           <div />
         ) : !this.state.submitted ? (
