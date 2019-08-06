@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Row, Col, Button} from 'react-bootstrap'
+import {Row, Col, Button, Table} from 'react-bootstrap'
 import {getOrderThunk} from '../store/cart'
 import UserUpdate from './userUpdateForm'
+import {numberWithCommas} from './utils'
 
 /**
  * COMPONENT
@@ -47,17 +48,34 @@ class UserHome extends React.Component {
             </div>
           </Col>
           <Col>
-            <div id="user-orders">
+            <div id="user-info">
               <h4>Your orders:</h4>
               {orderObjKeys.map(key => {
                 return (
-                  <div key={key} className="user-order">
+                  <div key={key}>
                     <h5>
                       Order #{key} made {orderObj[key][0].createdAt}
                     </h5>
-                    {orderObj[key].map(order => {
-                      return <div key={order[0]}>{order.productName}</div>
-                    })}
+                    <Table>
+                      <tbody>
+                        {orderObj[key].map(order => {
+                          return (
+                            <tr key={order[0]}>
+                              <td>{order.productName} </td>
+                              <td>${numberWithCommas(order.price)}</td>
+                            </tr>
+                          )
+                        })}
+                        <tr>
+                          <td>Total</td>
+                          <td>
+                            ${numberWithCommas(
+                              orderObj[key].reduce((a, b) => a + b.price, 0)
+                            )}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
                   </div>
                 )
               })}
