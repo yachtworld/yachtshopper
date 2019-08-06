@@ -40,19 +40,24 @@ class EditUsers extends React.Component {
               </td>
             </tr>
             {users.map(user => {
+              console.log(user)
               return (
                 <tr key={user.id}>
                   <td>{user.email}</td>
                   <td>{user.name}</td>
-                  <td>
-                    <Button
-                      type="button"
-                      id={user.id}
-                      onClick={this.handleDeleteUser}
-                    >
-                      Delete
-                    </Button>
-                  </td>
+                  {user.admin ? (
+                    <td>Admin</td>
+                  ) : (
+                    <td>
+                      <Button
+                        type="button"
+                        id={user.id}
+                        onClick={this.handleDeleteUser}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  )}
                 </tr>
               )
             })}
