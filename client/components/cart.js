@@ -21,6 +21,7 @@ class Cart extends React.Component {
 
   handleClick(event) {
     this.props.deleteItemThunk(event.target.id)
+    localStorage.removeItem(event.target.id)
   }
 
   handleCheckout() {
@@ -51,7 +52,6 @@ class Cart extends React.Component {
 
     // if we are not logged in, then store cart on local storage
     //if (!isLoggedIn) {
-    // always render from local storage irregardless of whether you are logged in or not
     for (let i = 0; i < cartProducts.length; i++) {
       myStorage.setItem(cartProducts[i].id, cartProducts[i].id)
     }
