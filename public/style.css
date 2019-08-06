@@ -144,6 +144,18 @@ a {
   width: 80%;
 }
 
+
+#not-found {
+  text-align: center;
+  color: gray;
+}
+
+#not-found-img {
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 .product-form {
   width: 40%;
   height: 70vh;
@@ -171,4 +183,5 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+
 }
