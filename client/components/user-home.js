@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Button} from 'react-bootstrap'
 import {getOrderThunk} from '../store/cart'
+import UserUpdate from './userUpdateForm'
 
 /**
  * COMPONENT
@@ -10,6 +11,10 @@ import {getOrderThunk} from '../store/cart'
 class UserHome extends React.Component {
   componentDidMount() {
     this.props.getOrderThunk()
+  }
+
+  handleSubmit() {
+    this.props.history.push('/updateuser')
   }
   render() {
     let {email, name, address, orders} = this.props
@@ -34,6 +39,10 @@ class UserHome extends React.Component {
               <h4>Your info:</h4>
               <p> Address: {address}</p>
               <p>Email: {email}</p>
+            </div>
+            <div>
+              <p> </p>
+              <UserUpdate />
             </div>
           </Col>
           <Col>
