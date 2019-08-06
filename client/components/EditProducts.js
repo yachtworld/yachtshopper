@@ -49,6 +49,7 @@ class EditProducts extends React.Component {
                 <td>{product.location}</td>
                 <td>
                   <Button
+                    variant="outline-danger"
                     type="button"
                     id={product.id}
                     onClick={this.handleDeleteProduct}

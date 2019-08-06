@@ -49,6 +49,7 @@ class EditUsers extends React.Component {
                   ) : (
                     <td>
                       <Button
+                        variant="outline-danger"
                         type="button"
                         id={user.id}
                         onClick={this.handleDeleteUser}
