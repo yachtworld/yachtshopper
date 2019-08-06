@@ -49,31 +49,6 @@ describe('React', () => {
     // })
   }) // end <AllProducts /> component
 
-  describe('<Cart /> component', () => {
-    let wrapper
-    let renderWrapper
-
-    beforeEach('Create component', () => {
-      wrapper = shallow(<Cart store={store} />)
-      renderWrapper = render(<Cart store={store} />)
-      // console.log(renderWrapper)
-      // console.log(wrapper.debug())
-      // console.log(wrapper.props().children.props)
-    })
-
-    it('expects productsThunk to be a function', () => {
-      expect(wrapper.props().children.props.productsThunk).to.be.a('function')
-    })
-
-    it('expects getCartThunk to be a function', () => {
-      expect(wrapper.props().children.props.getCartThunk).to.be.a('function')
-    })
-
-    it('expect one table to be rendered', () => {
-      expect(renderWrapper.find('.all-products-div')._root.length).to.equal(1)
-    })
-  }) // end <Cart /> component
-
   describe('<SingleProduct /> component', () => {
     let wrapper
     let renderWrapper
