@@ -61,40 +61,9 @@ class AdminPage extends React.Component {
     }
     return (
       <div className="admin-page">
-        <div className="edit-users">
-          <Table>
-            <tbody>
-              <tr key="0">
-                <td>
-                  <b>E-mail</b>
-                </td>
-                <td>
-                  <b>Name</b>
-                </td>
-              </tr>
-              {users.map(user => {
-                return (
-                  <tr key={user.id}>
-                    <td>{user.email}</td>
-                    <td>{user.name}</td>
-                    <td>
-                      <Button
-                        type="button"
-                        id={user.id}
-                        onClick={this.handleDeleteProduct}
-                      >
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </Table>
-        </div>
         <div className="edit-products">
           <Form onSubmit={this.handleSubmit} className="product-form">
-            <h2>Add Island</h2>
+            <h2>Edit Islands</h2>
             <Form.Label htmlFor="name">Name:</Form.Label>
             <Form.Control
               type="text"
@@ -151,6 +120,9 @@ class AdminPage extends React.Component {
                 <td>
                   <b>Location</b>
                 </td>
+                <td>
+                  <b>Remove</b>
+                </td>
               </tr>
               {products.map(product => {
                 return (
@@ -162,6 +134,41 @@ class AdminPage extends React.Component {
                       <Button
                         type="button"
                         id={product.id}
+                        onClick={this.handleDeleteProduct}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </Table>
+        </div>
+        <div className="edit-users">
+          <h2>Edit Users</h2>
+          <Table>
+            <tbody>
+              <tr key="0">
+                <td>
+                  <b>E-mail</b>
+                </td>
+                <td>
+                  <b>Name</b>
+                </td>
+                <td>
+                  <b>Remove</b>
+                </td>
+              </tr>
+              {users.map(user => {
+                return (
+                  <tr key={user.id}>
+                    <td>{user.email}</td>
+                    <td>{user.name}</td>
+                    <td>
+                      <Button
+                        type="button"
+                        id={user.id}
                         onClick={this.handleDeleteProduct}
                       >
                         Delete

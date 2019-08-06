@@ -159,3 +159,16 @@ a {
   display: flex;
   justify-content: space-between;
 }
+
+.edit-users {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin-left: auto;
+}
+
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
