@@ -67,11 +67,15 @@ class UserHome extends React.Component {
                           )
                         })}
                         <tr>
-                          <td>Total</td>
                           <td>
-                            ${numberWithCommas(
-                              orderObj[key].reduce((a, b) => a + b.price, 0)
-                            )}
+                            <b>Total</b>
+                          </td>
+                          <td>
+                            <b>
+                              ${numberWithCommas(
+                                orderObj[key].reduce((a, b) => a + b.price, 0)
+                              )}
+                            </b>
                           </td>
                         </tr>
                       </tbody>

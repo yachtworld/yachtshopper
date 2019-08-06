@@ -238,3 +238,8 @@ a {
   width: 200px;
   align-items: flex-end;
 }
+
+#user-home {
+  width: 90%;
+  margin-left: 5%;
+}

@@ -37,9 +37,9 @@ class UserUpdate extends React.Component {
     }
     return (
       <div className="admin-page">
-        <div className="edit-products">
-          <Form onSubmit={this.handleSubmit} className="product-form">
-            <h3>Edit User Profile:</h3>
+        <div>
+          <Form onSubmit={this.handleSubmit} className="user-form">
+            <h4>Edit User Profile:</h4>
             <Form.Label htmlFor="name">Name:</Form.Label>
             <Form.Control
               type="text"
