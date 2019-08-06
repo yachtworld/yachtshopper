@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
       // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'email']
+      attributes: ['id', 'email', 'name']
     })
     if (req.user) {
       if (req.user.admin === true) {
@@ -21,5 +21,20 @@ router.get('/', async (req, res, next) => {
     }
   } catch (err) {
     next(err)
+  }
+})
+
+router.put('/delete', async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: {
+        id: req.body.id
+      }
+    })
+
+    const users = await User.findAll({order: [['id', 'ASC']]})
+    res.json(users).sendStatus(200)
+  } catch (error) {
+    res.send({error: 'user not found'})
   }
 })

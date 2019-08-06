@@ -39,7 +39,6 @@ router.put('/delete', async (req, res, next) => {
     })
 
     const products = await Products.findAll({order: [['id', 'ASC']]})
-    console.log('PRODUCTS', products)
     res.json(products).sendStatus(200)
   } catch (error) {
     res.send({error: 'cart not found'})
