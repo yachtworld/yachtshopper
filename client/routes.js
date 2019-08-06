@@ -15,6 +15,7 @@ import AdminPage from './components/adminPage'
 
 import NotFound from './components/notFound'
 import Home from './components/home'
+import UserUpdate from './components/userUpdateForm'
 
 import GoogleMap from './components/map'
 
@@ -28,7 +29,6 @@ class Routes extends Component {
 
   render() {
     let {isLoggedIn, isAdmin} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -53,6 +53,11 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route
+              exact
+              path="/userupdate"
+              render={props => <UserUpdate {...props} />}
+            />
             {isAdmin && <Route exact path="/admin" component={AdminPage} />}
             <Route component={NotFound} />
           </Switch>

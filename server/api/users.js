@@ -52,3 +52,17 @@ router.put('/delete', async (req, res, next) => {
     res.send({error: 'user not found'})
   }
 })
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.id)
+    const updateUser = await user.update({
+      name: req.body.name,
+      address: req.body.address,
+      email: req.body.email
+    })
+    res.json(updateUser)
+  } catch (error) {
+    next(error)
+  }
+})
