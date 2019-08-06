@@ -4,7 +4,6 @@ import {productThunk} from '../store/product'
 import {Row, Col, Button, Alert} from 'react-bootstrap'
 import {addToCartThunk, getCartThunk} from '../store/cart'
 import {numberWithCommas} from './utils'
-import MyMapComponent from './myMapComponent'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
@@ -45,11 +44,6 @@ class SingleProduct extends React.Component {
                   className="icon"
                 />{' '}
                 {singleProduct.location}
-                {/* <MyMapComponent
-                  products={[singleProduct]}
-                  customHeight="300px"
-                  customCenter={singleProduct.coords}
-                /> */}
               </p>
               <p>{singleProduct.description}</p>
               {singleProduct.sold ? (
