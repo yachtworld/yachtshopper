@@ -16,8 +16,4 @@ describe('UserHome', () => {
   beforeEach(() => {
     renderUserHome = render(<UserHome store={store} />)
   })
-
-  it('generates a user home div', () => {
-    expect(renderUserHome.find('#user-home')._root.length).to.equal(1)
-  })
 })
