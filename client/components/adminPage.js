@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Form, Button, Table} from 'react-bootstrap'
 import {
   addProductThunk,
   productsThunk,
@@ -49,85 +50,86 @@ class AdminPage extends React.Component {
       products = []
     }
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Name:</label>
-          <input
+      <div className="edit-products">
+        <Form onSubmit={this.handleSubmit} className="product-form">
+          <h2>Add Island</h2>
+          <Form.Label htmlFor="name">Name:</Form.Label>
+          <Form.Control
             type="text"
             name="name"
             value={this.state.name}
             onChange={this.handleChange}
           />
 
-          <label htmlFor="imgUrl">Image URL:</label>
-          <input
+          <Form.Label htmlFor="imgUrl">Image URL:</Form.Label>
+          <Form.Control
             type="text"
             name="imgUrl"
             value={this.state.imgUrl}
             onChange={this.handleChange}
           />
 
-          <label htmlFor="price">Price:</label>
-          <input
+          <Form.Label htmlFor="price">Price:</Form.Label>
+          <Form.Control
             type="number"
             name="price"
             value={this.state.price}
             onChange={this.handleChange}
           />
 
-          <label htmlFor="location">Location:</label>
-          <input
+          <Form.Label htmlFor="location">Location:</Form.Label>
+          <Form.Control
             type="text"
             name="location"
             value={this.state.location}
             onChange={this.handleChange}
           />
 
-          <label htmlFor="description">Description:</label>
-          <input
+          <Form.Label htmlFor="description">Description:</Form.Label>
+          <Form.Control
             type="text"
             name="description"
             value={this.state.description}
             onChange={this.handleChange}
           />
-          <input type="submit" value="Submit" />
-        </form>
+          <Button type="submit" className="submit-btn">
+            Submit
+          </Button>
+        </Form>
 
-        <div>
-          <table>
-            <tbody>
-              <tr key="0">
-                <td>
-                  <b>Product Name</b>
-                </td>
-                <td>
-                  <b>Price</b>
-                </td>
-                <td>
-                  <b>Location</b>
-                </td>
-              </tr>
-              {products.map(product => {
-                return (
-                  <tr key={product.id}>
-                    <td>{product.name}</td>
-                    <td>{product.price}</td>
-                    <td>{product.location}</td>
-                    <td>
-                      <button
-                        type="button"
-                        id={product.id}
-                        onClick={this.handleClick}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
+        <Table>
+          <tbody>
+            <tr key="0">
+              <td>
+                <b>Product Name</b>
+              </td>
+              <td>
+                <b>Price</b>
+              </td>
+              <td>
+                <b>Location</b>
+              </td>
+            </tr>
+            {products.map(product => {
+              return (
+                <tr key={product.id}>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.location}</td>
+                  <td>
+                    <Button
+                      type="button"
+                      id={product.id}
+                      onClick={this.handleClick}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </Table>
       </div>
     )
   }
