@@ -22,12 +22,12 @@ class UserUpdate extends React.Component {
   handleChange(event) {
     this.setState({[event.target.name]: event.target.value})
     this.setState({id: this.props.user.id})
-    console.log(this.state)
   }
 
   handleSubmit(event) {
     event.preventDefault()
     this.props.fetchUserUpdate(this.state)
+    // window.location.reload()
     this.setState(defaultState)
   }
 
@@ -36,7 +36,6 @@ class UserUpdate extends React.Component {
     if (!user) {
       user = {}
     }
-    console.log('USER:', user)
     return (
       <div className="admin-page">
         <div className="edit-products">

@@ -68,10 +68,9 @@ export const fetchUserUpdate = updatedUser => {
         updatedUser
       )
       const userData = response.data
-      const newAction = updateUser(userData)
-      dispatch(newAction)
+      dispatch(updateUser(userData))
     } catch (error) {
-      console.log("You didn't update the form")
+      console.log(error)
     }
   }
 }
@@ -86,7 +85,12 @@ export default function(state = defaultUser, action) {
     case REMOVE_USER:
       return defaultUser
     case UPDATE_USER:
-      return {...state, defaultUser: action.updatedUser}
+      return {
+        ...state,
+        name: action.updatedUser.name,
+        address: action.updatedUser.address,
+        email: action.updatedUser.email
+      }
     default:
       return state
   }

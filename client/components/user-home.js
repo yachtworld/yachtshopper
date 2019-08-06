@@ -13,7 +13,8 @@ class UserHome extends React.Component {
     this.props.getOrderThunk()
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault()
     this.props.history.push('/updateuser')
   }
   render() {
