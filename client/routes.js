@@ -15,6 +15,7 @@ import SingleProduct from './components/SingleProduct'
 import AdminPage from './components/adminPage'
 
 import NotFound from './components/notFound'
+import Home from './components/home'
 
 /**
  * COMPONENT
@@ -41,7 +42,7 @@ class Routes extends Component {
           render={routeProps => <SingleProduct {...routeProps} />}
         />
         <Route exact path="/edit-products" component={AdminPage} />
-        <Route exact path="/" component={AllProducts} />
+        <Route exact path="/" component={Home} />
 
         {isLoggedIn && (
           <Switch>
