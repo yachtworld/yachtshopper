@@ -69,11 +69,11 @@ class Cart extends React.Component {
     //}
 
     return cartProducts.length > 0 ? (
-      <div>
-        <h3>
-          Your Cart:
+      <div className="cart-render">
+        <div className="cart-products-div">
+          <h3>Your Cart: </h3>
           <Table className="cart-products-div">
-            <tbody>
+            <tbody className="cart-elements">
               {cartProducts.map((elem, index) => (
                 <tr key={index} className="cart-products-row">
                   <td className="cart-products-img-td">
@@ -93,32 +93,36 @@ class Cart extends React.Component {
                   </td>
                 </tr>
               ))}
-              <tr>
-                <td>
-                  <h4>Order Total:</h4>
-                </td>
-                <td />
-                <td>
-                  ${numberWithCommas(
-                    cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)
-                  )}
-                </td>
-                <td>
-                  <Button
-                    type="button"
-                    variant="outline-success"
-                    onClick={this.handleCheckout}
-                  >
-                    Submit order
-                  </Button>
-                </td>
-              </tr>
             </tbody>
           </Table>
-        </h3>
+        </div>
+        <div>
+          <tr className="order-total">
+            <td>
+              <h4>Order Total:</h4>
+            </td>
+            <td />
+            <td>
+              <h3>
+                ${numberWithCommas(
+                  cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)
+                )}
+              </h3>
+            </td>
+            <td>
+              <Button
+                type="button"
+                variant="outline-success"
+                onClick={this.handleCheckout}
+              >
+                Submit order
+              </Button>
+            </td>
+          </tr>
+        </div>
       </div>
     ) : (
-      <h2>Your cart is currently empty!</h2>
+      <h2 className="cart-render">Your cart is currently empty!</h2>
     )
   }
 }
