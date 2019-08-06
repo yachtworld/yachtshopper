@@ -41,7 +41,6 @@ class Routes extends Component {
           path="/products/:id"
           render={routeProps => <SingleProduct {...routeProps} />}
         />
-        <Route exact path="/edit-products" component={AdminPage} />
         <Route exact path="/" component={Home} />
 
         {isLoggedIn && (
