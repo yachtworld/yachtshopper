@@ -74,7 +74,6 @@ export const deleteItemThunk = productId => async (dispatch, getState) => {
   try {
     const newCart = await axios.put('/api/cart/delete', {id: productId})
     if (!newCart.data.error) {
-      console.log('delete Item Thunk')
       dispatch(getCart(newCart.data))
     } else {
       dispatch(deleteItem(productId, getState().cart.cart))

@@ -40,7 +40,6 @@ class EditUsers extends React.Component {
               </td>
             </tr>
             {users.map(user => {
-              console.log(user)
               return (
                 <tr key={user.id}>
                   <td>{user.email}</td>

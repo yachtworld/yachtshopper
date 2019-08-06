@@ -15,9 +15,6 @@ describe('UserHome', () => {
 
   beforeEach(() => {
     renderUserHome = render(<UserHome store={store} />)
-    //console.log(renderUserHome.debug)
-    // console.log(renderUserHome)
-    // console.log(renderUserHome.props())
   })
 
   it('generates a user home div', () => {

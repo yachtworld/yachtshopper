@@ -56,8 +56,8 @@ export const productThunk = id => async dispatch => {
 export const addProductThunk = product => {
   return async dispatch => {
     try {
-      await axios.post('api/products', product)
-      dispatch(addProduct(product))
+      const {data} = await axios.post('api/products', product)
+      dispatch(addProduct(data))
     } catch (error) {
       console.error(error)
     }
