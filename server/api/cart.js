@@ -64,7 +64,8 @@ router.put('/checkout', async (req, res, next) => {
           userId: user.id,
           productId: item.id,
           orderId: orderId,
-          productName: item.name
+          productName: item.name,
+          price: item.price
         })
         await Products.update({sold: true}, {where: {id: item.id}})
       })

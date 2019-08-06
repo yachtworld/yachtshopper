@@ -134,6 +134,7 @@ a {
 #user-info {
   border: 1px solid gray;
   border-radius: 15px;
+  padding-left: 10px;
 }
 
 .user-order {
