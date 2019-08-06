@@ -20,10 +20,10 @@ router.get('/', async (req, res, next) => {
       if (req.user.admin === true) {
         res.json(users)
       } else {
-        unauthErr()
+        unauthErr(next)
       }
     } else {
-      unauthErr()
+      unauthErr(next)
     }
   } catch (err) {
     next(err)
@@ -43,10 +43,10 @@ router.put('/delete', async (req, res, next) => {
         const users = await User.findAll({order: [['id', 'ASC']]})
         res.json(users).sendStatus(200)
       } else {
-        unauthErr()
+        unauthErr(next)
       }
     } else {
-      unauthErr()
+      unauthErr(next)
     }
   } catch (error) {
     res.send({error: 'user not found'})
