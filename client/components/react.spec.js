@@ -12,7 +12,7 @@ import AllProducts from './allProducts'
 import Cart from './cart'
 import SingleProduct from './SingleProduct'
 import CarouselHeader from './carousel'
-import {Provider} from 'react-redux'
+import NotFound from './notFound'
 
 describe('React', () => {
   describe('<AllProducts /> component', () => {
@@ -92,5 +92,39 @@ describe('React', () => {
     it('expect one table to be rendered', () => {
       expect(renderWrapper.find('.single-product-div')._root.length).to.equal(1)
     })
-  }) // end <SingleProduct /> component
+
+    describe('<SingleProduct /> component', () => {
+      beforeEach('Create component', () => {
+        wrapper = shallow(<SingleProduct store={store} />)
+        renderWrapper = render(<SingleProduct store={store} />)
+      })
+
+      it('expects productThunk to be a function', () => {
+        expect(wrapper.props().children.props.productThunk).to.be.a('function')
+      })
+
+      it('expect one table to be rendered', () => {
+        expect(renderWrapper.find('.single-product-div')._root.length).to.equal(
+          1
+        )
+      })
+    }) // end <SingleProduct /> component
+
+    describe('<NotFound /> component', () => {
+      beforeEach('Create component', () => {
+        wrapper = shallow(<NotFound />)
+      })
+
+      it('renders a not found message in an h2', () => {
+        expect(
+          wrapper
+            .find('h2')
+            .text()
+            .trim()
+        ).to.equal(
+          'Sorry, the island you are looking for is in the Bermuda Triangle'
+        )
+      })
+    }) // end <NotFound /> component
+  })
 }) // end React specs
