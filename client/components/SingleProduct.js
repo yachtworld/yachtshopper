@@ -4,11 +4,13 @@ import {productThunk} from '../store/product'
 import {Row, Col, Button, Alert} from 'react-bootstrap'
 import {addToCartThunk, getCartThunk} from '../store/cart'
 import {numberWithCommas} from './utils'
+import MyMapComponent from './myMapComponent'
 
 class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.productThunk(this.props.match.params.id)
     this.props.getCartThunk()
+    window.initMap = function() {} //necessary because of Google Maps callback
   }
 
   clickHandler = event => {
@@ -43,6 +45,11 @@ class SingleProduct extends React.Component {
                   className="icon"
                 />{' '}
                 {singleProduct.location}
+                {/* <MyMapComponent
+                  products={[singleProduct]}
+                  customHeight="300px"
+                  customCenter={singleProduct.coords}
+                /> */}
               </p>
               <p>{singleProduct.description}</p>
               {singleProduct.sold ? (

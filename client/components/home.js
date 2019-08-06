@@ -13,7 +13,7 @@ const Home = () => {
           <Link to="/signup" className="home-links">
             Sign Up
           </Link>
-          <Link to="/products" className="home-links">
+          <Link to="/map" className="home-links">
             Explore
           </Link>
         </div>

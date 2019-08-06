@@ -11,7 +11,13 @@ class MyMap extends React.Component {
   }
 
   render() {
-    return <MyMapComponent products={this.props.products} />
+    return (
+      <MyMapComponent
+        products={this.props.products}
+        customHeight="700px"
+        customCenter={[0, 0]}
+      />
+    )
   }
 }
 

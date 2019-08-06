@@ -70,7 +70,7 @@ async function seed() {
       location: 'Rio de Janeiro, Brazil',
       description:
         'We move around by ship or submarine, thanks to the algae fuel or hydrocarbons we produce free of greenhouse gas emissions. We make our biofuels by extracting hydrogen and carbon from seawater through osmotic pressure, then synthesizing them. This process allows us to also pump the carbon dioxide out of the oceans, thus neutralizing the acidification process that had been destroying our ecosystems such as the Great Barrier Reef.',
-      coords: [[-22.9138851, -43.726166]]
+      coords: [-22.9138851, -43.726166]
     }),
     Products.create({
       name: 'Amillarah Private Island',

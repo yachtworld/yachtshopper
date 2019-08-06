@@ -215,3 +215,7 @@ a {
   font-size: 110%;
   transition: color 0.3s;
 }
+
+.map-img {
+  width: 200px;
+}

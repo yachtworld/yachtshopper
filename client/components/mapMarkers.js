@@ -34,13 +34,14 @@ export default class MapMarker extends React.Component {
       >
         {this.state.isOpen && (
           <InfoWindow onCloseClick={this.toggleClose}>
-            <Link to={`products/${this.props.products.id}`}>
-              {this.props.product.name}
-              <br />
-              <img src={this.props.product.imageUrl} />
+            <Link to={`products/${this.props.product.id}`}>
+              <div>
+                {this.props.product.name}
+                <br />
+                <img src={this.props.product.imgUrl} className="map-img" />
+              </div>
             </Link>
           </InfoWindow>
-        )}
         )}
       </Marker>
     )
