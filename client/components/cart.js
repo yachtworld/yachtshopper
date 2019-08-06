@@ -147,10 +147,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapState, mapDispatchToProps)(Cart)
-
-/**
- * PROP TYPES
- */
-// Cart.propTypes = {
-//   email: PropTypes.string
-// }
