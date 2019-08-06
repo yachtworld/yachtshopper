@@ -255,6 +255,11 @@ a {
   margin-left: auto;
 }
 
+.order-name,
+.order-price {
+  width: 50%;
+}
+
 .submit-order {
   width: 90%;
   margin-left: 5%;
