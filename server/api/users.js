@@ -2,6 +2,12 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
+const unauthErr = next => {
+  const err = new Error('You are not authorized to view this page.')
+  err.status = 500
+  next(err)
+}
+
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
@@ -14,10 +20,10 @@ router.get('/', async (req, res, next) => {
       if (req.user.admin === true) {
         res.json(users)
       } else {
-        res.status(500).send('You are not authorized to view this page.')
+        unauthErr()
       }
     } else {
-      res.status(500).send('You are not authorized to view this page.')
+      unauthErr()
     }
   } catch (err) {
     next(err)
@@ -26,14 +32,22 @@ router.get('/', async (req, res, next) => {
 
 router.put('/delete', async (req, res, next) => {
   try {
-    await User.destroy({
-      where: {
-        id: req.body.id
-      }
-    })
+    if (req.user) {
+      if (req.user.admin === true) {
+        await User.destroy({
+          where: {
+            id: req.body.id
+          }
+        })
 
-    const users = await User.findAll({order: [['id', 'ASC']]})
-    res.json(users).sendStatus(200)
+        const users = await User.findAll({order: [['id', 'ASC']]})
+        res.json(users).sendStatus(200)
+      } else {
+        unauthErr()
+      }
+    } else {
+      unauthErr()
+    }
   } catch (error) {
     res.send({error: 'user not found'})
   }
