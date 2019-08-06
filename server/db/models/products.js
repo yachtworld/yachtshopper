@@ -24,6 +24,11 @@ const Products = db.define('products', {
   sold: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  coords: {
+    type: Sequelize.ARRAY(Sequelize.FLOAT),
+    allowNull: true,
+    defaultValue: null
   }
 })
 

@@ -16,6 +16,8 @@ import AdminPage from './components/adminPage'
 import NotFound from './components/notFound'
 import Home from './components/home'
 
+import GoogleMap from './components/map'
+
 /**
  * COMPONENT
  */
@@ -41,6 +43,8 @@ class Routes extends Component {
           render={routeProps => <SingleProduct {...routeProps} />}
         />
         <Route exact path="/edit-products" component={AdminPage} />
+        <Route exact path="/map" component={GoogleMap} />
+
         <Route exact path="/" component={Home} />
 
         {isLoggedIn && (
