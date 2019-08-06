@@ -24,6 +24,9 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         <LinkContainer to="/products">
           <Nav.Link>All Products</Nav.Link>
         </LinkContainer>
+        <LinkContainer to="/map">
+          <Nav.Link>Explore</Nav.Link>
+        </LinkContainer>
       </div>
       <div id="navbar-right">
         {isAdmin ? (

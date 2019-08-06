@@ -74,25 +74,27 @@ class Cart extends React.Component {
           <h3>Your Cart: </h3>
           <Table>
             <tbody>
-              {cartProducts.map((elem, index) => (
-                <tr key={index}>
-                  <td className="cart-products-img-td">
-                    <img src={elem.imgUrl} className="cart-products-img" />
-                  </td>
-                  <td>{elem.name}</td>
-                  <td>${numberWithCommas(elem.price)}</td>
-                  <td>
-                    <Button
-                      type="button"
-                      id={elem.id}
-                      variant="outline-danger"
-                      onClick={this.handleClick}
-                    >
-                      Remove from cart
-                    </Button>
-                  </td>
-                </tr>
-              ))}
+              <h4>
+                {cartProducts.map((elem, index) => (
+                  <tr key={index}>
+                    <td className="cart-products-img-td">
+                      <img src={elem.imgUrl} className="cart-products-img" />
+                    </td>
+                    <td>{elem.name}</td>
+                    <td>${numberWithCommas(elem.price)}</td>
+                    <td>
+                      <Button
+                        type="button"
+                        id={elem.id}
+                        variant="outline-danger"
+                        onClick={this.handleClick}
+                      >
+                        Remove from cart
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </h4>
             </tbody>
           </Table>
         </div>
