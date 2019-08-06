@@ -243,3 +243,14 @@ a {
   width: 90%;
   margin-left: 5%;
 }
+
+#navbar-left,
+#navbar-right,
+#navbar-all {
+  display: flex;
+  flex-direction: row;
+}
+
+#navbar-right {
+  margin-left: auto;
+}
