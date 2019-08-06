@@ -73,9 +73,9 @@ class Cart extends React.Component {
         <div className="cart-products-div">
           <h3>Your Cart: </h3>
           <Table>
-            <tbody className="cart-elements">
+            <tbody>
               {cartProducts.map((elem, index) => (
-                <tr key={index} className="cart-product-row">
+                <tr key={index}>
                   <td className="cart-products-img-td">
                     <img src={elem.imgUrl} className="cart-products-img" />
                   </td>
