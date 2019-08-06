@@ -59,11 +59,6 @@ class CarouselHeader extends React.Component {
   }
 }
 
-// const CarouselHeader = props => {
-//   console.log(props)
-
-// }
-
 const mapStateToProps = state => ({
   products: state.product.productList
 })

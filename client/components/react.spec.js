@@ -31,9 +31,6 @@ describe('React', () => {
           <CarouselHeader store={store} />
         </AllProducts>
       )
-      // console.log(renderWrapper.debug())
-      // console.log('debug console', wrapper.debug())
-      // console.log(wrapper.props().children.props.productsThunk)
     })
 
     it('expects productsThunk to be a function', () => {
@@ -43,11 +40,7 @@ describe('React', () => {
     it('expects addToCartThunk to be a function', () => {
       expect(wrapper.props().children.props.addToCartThunk).to.be.a('function')
     })
-
-    // it('expect one table to be rendered', () => {
-    //   expect(renderWrapper.find('.all-products-div')._root.length).to.equal(1)
-    // })
-  }) // end <AllProducts /> component
+  })
 
   describe('<Cart /> component', () => {
     let wrapper
@@ -56,9 +49,6 @@ describe('React', () => {
     beforeEach('Create component', () => {
       wrapper = shallow(<Cart store={store} />)
       renderWrapper = render(<Cart store={store} />)
-      // console.log(renderWrapper)
-      // console.log(wrapper.debug())
-      // console.log(wrapper.props().children.props)
     })
 
     it('expects productsThunk to be a function', () => {
@@ -81,9 +71,6 @@ describe('React', () => {
     beforeEach('Create component', () => {
       wrapper = shallow(<SingleProduct store={store} />)
       renderWrapper = render(<SingleProduct store={store} />)
-      // console.log(renderWrapper)
-      // console.log(wrapper.debug())
-      // console.log(wrapper.props().children.props)
     })
 
     it('expects productThunk to be a function', () => {

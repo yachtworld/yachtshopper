@@ -15,7 +15,6 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    // console.log('user', req.user)
     if (req.user.id === req.session.passport.user) {
       const user = await User.findByPk(req.session.passport.user)
       const userCart = await user.getProducts()
