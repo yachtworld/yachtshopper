@@ -254,3 +254,9 @@ a {
 #navbar-right {
   margin-left: auto;
 }
+
+.submit-order {
+  width: 90%;
+  margin-left: 5%;
+  align-items: center;
+}
