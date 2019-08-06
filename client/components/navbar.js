@@ -68,6 +68,8 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
       dispatch(clearCart())
+
+      localStorage.clear()
     }
   }
 }
