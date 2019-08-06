@@ -13,6 +13,7 @@ import Cart from './cart'
 import SingleProduct from './SingleProduct'
 import CarouselHeader from './carousel'
 import NotFound from './notFound'
+import Home from './home'
 
 describe('React', () => {
   describe('<AllProducts /> component', () => {
@@ -126,5 +127,24 @@ describe('React', () => {
         )
       })
     }) // end <NotFound /> component
+
+    describe('<Home /> component', () => {
+      beforeEach('Create component', () => {
+        wrapper = shallow(<Home />)
+      })
+
+      it('renders a welcome message in an h1', () => {
+        expect(
+          wrapper
+            .find('h1')
+            .text()
+            .trim()
+        ).to.equal('Welcome To Your New Paradise')
+      })
+
+      it('renders three links', () => {
+        expect(wrapper.find('Link').length).to.equal(3)
+      })
+    }) // end <Home /> component
   })
 }) // end React specs
