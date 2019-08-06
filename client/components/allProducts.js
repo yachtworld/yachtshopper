@@ -25,61 +25,47 @@ class AllProducts extends React.Component {
       products = []
     }
 
-    //splits array up into sub-arrays for proper rendering
-    const chunker = function(arr, chunkSize) {
-      let row = []
-      for (let i = 0; i < arr.length; i += chunkSize)
-        row.push(arr.slice(i, i + chunkSize))
-      return row
-    }
-
-    let chunkedProducts = chunker(products, 3)
-
     return (
       <div>
         <Carousel id="header-carousel" />
-        {chunkedProducts.map((productArr, index) => {
-          return (
-            <Row className="all-products-div" key={index}>
-              {productArr.map(product => {
-                return (
-                  <Col key={product.id} className="all-products-row">
-                    <img src={product.imgUrl} className="all-products-img" />
-                    <Link
-                      to={`/products/${product.id}`}
-                      className="all-products-name"
-                    >
-                      {product.name}
-                    </Link>
+        <Row className="all-products-row">
+          {products.map(product => {
+            return (
+              <Col md="4" key={product.id} className="all-products-item">
+                <img src={product.imgUrl} className="all-products-img" />
+                <Link
+                  to={`/products/${product.id}`}
+                  className="all-products-name"
+                >
+                  {product.name}
+                </Link>
 
-                    <Link to={`/products/${product.id}`}>
-                      ${numberWithCommas(product.price)}
-                    </Link>
-                    {product.sold ? (
-                      <Alert variant="danger" className="product-alert">
-                        Island no longer available!
-                      </Alert>
-                    ) : this.props.cart.indexOf(product.id) > -1 ? (
-                      <Alert variant="primary" className="product-alert">
-                        Item already in cart
-                      </Alert>
-                    ) : (
-                      <Button
-                        type="button"
-                        id={product.id}
-                        onClick={this.clickHandler}
-                        variant="primary"
-                        className="all-products-btn"
-                      >
-                        Add to cart
-                      </Button>
-                    )}
-                  </Col>
-                )
-              })}
-            </Row>
-          )
-        })}
+                <Link to={`/products/${product.id}`}>
+                  ${numberWithCommas(product.price)}
+                </Link>
+                {product.sold ? (
+                  <Alert variant="danger" className="product-alert">
+                    Island no longer available!
+                  </Alert>
+                ) : this.props.cart.indexOf(product.id) > -1 ? (
+                  <Alert variant="primary" className="product-alert">
+                    Item already in cart
+                  </Alert>
+                ) : (
+                  <Button
+                    type="button"
+                    id={product.id}
+                    onClick={this.clickHandler}
+                    variant="primary"
+                    className="all-products-btn"
+                  >
+                    Add to cart
+                  </Button>
+                )}
+              </Col>
+            )
+          })}
+        </Row>
       </div>
     )
   }
