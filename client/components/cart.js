@@ -25,11 +25,13 @@ class Cart extends React.Component {
 
   handleCheckout() {
     this.props.clearCart()
+    localStorage.clear()
     this.props.history.push('/checkout')
   }
 
+  // eslint-disable-next-line complexity
   render() {
-    let {products} = this.props
+    let {products, isLoggedIn} = this.props
     let cart = this.props.cart
     if (!cart) {
       cart = []
@@ -40,6 +42,27 @@ class Cart extends React.Component {
     let cartProducts = []
     if (products.length && cart.length) {
       cartProducts = cart.map(elem => products[elem - 1])
+    }
+
+    // create persistent cart for not logged in user
+    let myStorage = window.localStorage
+
+    // if we are not logged in, then store cart on local storage
+    if (!isLoggedIn) {
+      for (let i = 0; i < cartProducts.length; i++) {
+        myStorage.setItem(cartProducts[i].id, cartProducts[i].id)
+      }
+
+      // convert into our cartProducts variable
+      let cartNotLoggedIn = []
+      for (var i = 0; i < localStorage.length; i++) {
+        cartNotLoggedIn.push(localStorage.getItem(localStorage.key(i)))
+      }
+
+      // create cartProducts for rendering
+      if (products.length && cartNotLoggedIn.length) {
+        cartProducts = cartNotLoggedIn.map(elem => products[elem - 1])
+      }
     }
 
     return cartProducts.length > 0 ? (
@@ -104,7 +127,8 @@ const mapState = state => {
   return {
     cart: state.cart.cart || [],
     products: state.product.productList,
-    user: state.user
+    user: state.user,
+    isLoggedIn: !!state.user.id
   }
 }
 

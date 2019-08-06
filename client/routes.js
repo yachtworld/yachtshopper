@@ -42,8 +42,10 @@ class Routes extends Component {
           path="/products/:id"
           render={routeProps => <SingleProduct {...routeProps} />}
         />
+         home-page
         <Route exact path="/edit-products" component={AdminPage} />
         <Route exact path="/map" component={GoogleMap} />
+
 
         <Route exact path="/" component={Home} />
 
