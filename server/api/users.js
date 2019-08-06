@@ -56,6 +56,9 @@ router.put('/delete', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id)
+    if (req.body.email === '') {
+      req.body.email = user.email
+    }
     const updateUser = await user.update({
       name: req.body.name,
       address: req.body.address,
