@@ -27,7 +27,6 @@ class UserUpdate extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
     this.props.fetchUserUpdate(this.state)
-    // window.location.reload()
     this.setState(defaultState)
   }
 
