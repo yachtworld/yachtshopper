@@ -169,7 +169,7 @@ class AdminPage extends React.Component {
                       <Button
                         type="button"
                         id={user.id}
-                        onClick={this.handleDeleteProduct}
+                        onClick={this.handleDeleteUser}
                       >
                         Delete
                       </Button>
