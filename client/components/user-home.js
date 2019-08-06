@@ -61,16 +61,20 @@ class UserHome extends React.Component {
                         {orderObj[key].map(order => {
                           return (
                             <tr key={order[0]}>
-                              <td>{order.productName} </td>
-                              <td>${numberWithCommas(order.price)}</td>
+                              <td className="order-name">
+                                {order.productName}{' '}
+                              </td>
+                              <td className="order-price">
+                                ${numberWithCommas(order.price)}
+                              </td>
                             </tr>
                           )
                         })}
                         <tr>
-                          <td>
+                          <td className="order-name">
                             <b>Total</b>
                           </td>
-                          <td>
+                          <td className="order-price">
                             <b>
                               ${numberWithCommas(
                                 orderObj[key].reduce((a, b) => a + b.price, 0)

@@ -254,3 +254,8 @@ a {
 #navbar-right {
   margin-left: auto;
 }
+
+.order-name,
+.order-price {
+  width: 50%;
+}
