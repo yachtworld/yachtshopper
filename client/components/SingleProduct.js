@@ -9,6 +9,7 @@ class SingleProduct extends React.Component {
   componentDidMount() {
     this.props.productThunk(this.props.match.params.id)
     this.props.getCartThunk()
+    window.initMap = function() {} //necessary because of Google Maps callback
   }
 
   clickHandler = event => {

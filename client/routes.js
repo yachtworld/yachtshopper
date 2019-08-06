@@ -4,8 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {Login, Signup, UserHome} from './components'
 import {me} from './store'
-// import {getOrderThunk} from './store/cart'
-import {productsThunk} from './store/product'
+
 import AllProducts from './components/AllProducts'
 
 import Cart from './components/Cart'
@@ -16,6 +15,8 @@ import AdminPage from './components/adminPage'
 
 import NotFound from './components/notFound'
 import Home from './components/home'
+
+import GoogleMap from './components/map'
 
 /**
  * COMPONENT
@@ -41,6 +42,11 @@ class Routes extends Component {
           path="/products/:id"
           render={routeProps => <SingleProduct {...routeProps} />}
         />
+         home-page
+        <Route exact path="/edit-products" component={AdminPage} />
+        <Route exact path="/map" component={GoogleMap} />
+
+
         <Route exact path="/" component={Home} />
 
         {isLoggedIn && (

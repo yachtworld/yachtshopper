@@ -144,7 +144,6 @@ a {
   width: 80%;
 }
 
-
 #not-found {
   text-align: center;
   color: gray;
@@ -183,5 +182,40 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+}
 
+#home-div {
+  background: url('https://pics.freeartbackgrounds.com/fullhd/Seascape_after_Sunset_Background-990.jpg')
+    no-repeat center center fixed;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+
+#home-content {
+  color: white;
+  text-shadow: 2px 2px 5px gray;
+  position: relative;
+  top: 30%;
+}
+
+.home-links {
+  padding: 20px;
+  color: white;
+}
+
+.home-links:hover {
+  color: darkcyan;
+  font-size: 110%;
+  transition: color 0.3s;
+}
+
+.map-img {
+  width: 200px;
 }
