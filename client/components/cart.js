@@ -72,10 +72,10 @@ class Cart extends React.Component {
       <div className="cart-render">
         <div className="cart-products-div">
           <h3>Your Cart: </h3>
-          <Table className="cart-products-div">
-            <tbody className="cart-elements">
+          <Table>
+            <tbody>
               {cartProducts.map((elem, index) => (
-                <tr key={index} className="cart-products-row">
+                <tr key={index}>
                   <td className="cart-products-img-td">
                     <img src={elem.imgUrl} className="cart-products-img" />
                   </td>
@@ -97,28 +97,30 @@ class Cart extends React.Component {
           </Table>
         </div>
         <div>
-          <tr className="order-total">
-            <td>
-              <h4>Order Total:</h4>
-            </td>
-            <td />
-            <td>
-              <h3>
-                ${numberWithCommas(
-                  cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)
-                )}
-              </h3>
-            </td>
-            <td>
-              <Button
-                type="button"
-                variant="outline-success"
-                onClick={this.handleCheckout}
-              >
-                Submit order
-              </Button>
-            </td>
-          </tr>
+          <tbody>
+            <tr className="order-total">
+              <td>
+                <h3>Order Total:</h3>
+              </td>
+              <td />
+              <td>
+                <h2>
+                  ${numberWithCommas(
+                    cartProducts.reduce((a, b) => a + parseInt(b.price, 10), 0)
+                  )}
+                </h2>
+              </td>
+              <td>
+                <Button
+                  type="button"
+                  variant="outline-success"
+                  onClick={this.handleCheckout}
+                >
+                  Submit order
+                </Button>
+              </td>
+            </tr>
+          </tbody>
         </div>
       </div>
     ) : (

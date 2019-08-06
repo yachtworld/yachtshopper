@@ -89,10 +89,12 @@ a {
 
 .cart-products-img {
   width: 90%;
+  border-radius: 15px;
 }
 
-.cart-products-row {
-  height: 200px;
+.cart-product-row {
+  display: flex;
+  justify-content: space-between;
 }
 
 .cart-products-img-td {
@@ -235,6 +237,11 @@ a {
   flex-direction: column;
   width: 200px;
   align-items: flex-end;
+}
+
+#user-home {
+  width: 90%;
+  margin-left: 5%;
 }
 
 #navbar-left,
