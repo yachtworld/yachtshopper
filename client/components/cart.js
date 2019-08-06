@@ -31,7 +31,9 @@ class Cart extends React.Component {
 
   // eslint-disable-next-line complexity
   render() {
+    console.log('PROPS', this.props)
     let {products, isLoggedIn} = this.props
+
     let cart = this.props.cart
     if (!cart) {
       cart = []
@@ -48,22 +50,23 @@ class Cart extends React.Component {
     let myStorage = window.localStorage
 
     // if we are not logged in, then store cart on local storage
-    if (!isLoggedIn) {
-      for (let i = 0; i < cartProducts.length; i++) {
-        myStorage.setItem(cartProducts[i].id, cartProducts[i].id)
-      }
-
-      // convert into our cartProducts variable
-      let cartNotLoggedIn = []
-      for (var i = 0; i < localStorage.length; i++) {
-        cartNotLoggedIn.push(localStorage.getItem(localStorage.key(i)))
-      }
-
-      // create cartProducts for rendering
-      if (products.length && cartNotLoggedIn.length) {
-        cartProducts = cartNotLoggedIn.map(elem => products[elem - 1])
-      }
+    //if (!isLoggedIn) {
+    // always render from local storage irregardless of whether you are logged in or not
+    for (let i = 0; i < cartProducts.length; i++) {
+      myStorage.setItem(cartProducts[i].id, cartProducts[i].id)
     }
+
+    // convert into our cartProducts variable
+    let cartNotLoggedIn = []
+    for (var i = 0; i < localStorage.length; i++) {
+      cartNotLoggedIn.push(localStorage.getItem(localStorage.key(i)))
+    }
+
+    // create cartProducts for rendering
+    if (products.length && cartNotLoggedIn.length) {
+      cartProducts = cartNotLoggedIn.map(elem => products[elem - 1])
+    }
+    //}
 
     return cartProducts.length > 0 ? (
       <div>
