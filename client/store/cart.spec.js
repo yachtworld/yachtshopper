@@ -34,7 +34,6 @@ describe('Cart routes', () => {
         mockAxios.onGet('/api/cart').replyOnce(200)
         await store.dispatch(getCartThunk())
         const actions = store.getActions()
-        console.log('actions', actions[0])
         expect(actions[0].type).to.be.equal('GET_CART')
       })
     })
