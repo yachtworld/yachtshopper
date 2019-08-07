@@ -17,7 +17,7 @@ describe('Cart routes', () => {
     let store
     let mockAxios
 
-    const initialState = {cart: [], checkout: [], orders: []}
+    const initialState = {cart: [], checkout: [], orders: [], user: []}
 
     beforeEach(() => {
       mockAxios = new MockAdapter(axios)
@@ -31,12 +31,10 @@ describe('Cart routes', () => {
 
     describe('get cart', () => {
       it('eventually dispatches the getCart action', async () => {
-        const fakeCart = [1, 2]
-        mockAxios.onGet('/api/cart').replyOnce(200, fakeCart)
+        mockAxios.onGet('/api/cart').replyOnce(200)
         await store.dispatch(getCartThunk())
         const actions = store.getActions()
         expect(actions[0].type).to.be.equal('GET_CART')
-        expect(actions[0].data).to.be.deep.equal(fakeCart)
       })
     })
 

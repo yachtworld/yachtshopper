@@ -32,7 +32,6 @@ class Cart extends React.Component {
 
   // eslint-disable-next-line complexity
   render() {
-    console.log('PROPS', this.props)
     let {products, isLoggedIn} = this.props
 
     let cart = this.props.cart
